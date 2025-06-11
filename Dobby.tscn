@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://v6t73n2jf2xb"]
+
+[ext_resource type="Script" path="res://Scripts/Dobbymovement.gd" id="1_7y735"]
+[ext_resource type="Texture2D" uid="uid://dlm6l16pen88g" path="res://Sprites/dobby-Recovered-Sheet.png" id="2_gnhvc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3gn5t"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ls6y"]
+atlas = ExtResource("2_gnhvc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxieh"]
+atlas = ExtResource("2_gnhvc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pasys"]
+atlas = ExtResource("2_gnhvc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awb1u"]
+atlas = ExtResource("2_gnhvc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dofg"]
+atlas = ExtResource("2_gnhvc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q3n7"]
+atlas = ExtResource("2_gnhvc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfn2k"]
+atlas = ExtResource("2_gnhvc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b15s2"]
+atlas = ExtResource("2_gnhvc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v3p6a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ls6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxieh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pasys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awb1u")
+}],
+"loop": true,
+"name": &"run",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dofg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8q3n7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfn2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b15s2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[node name="Dobby" type="CharacterBody2D"]
+script = ExtResource("1_7y735")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3gn5t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3.8147e-06, -1.90735e-06)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_v3p6a")
+animation = &"run"
+
+[node name="Components" type="Node" parent="."]
