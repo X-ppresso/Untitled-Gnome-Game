@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://pylcx5rd8k7o"]
+
+[ext_resource type="Texture2D" uid="uid://dlm6l16pen88g" path="res://Sprites/dobby-Recovered-Sheet.png" id="1_t2bkg"]
+[ext_resource type="Script" path="res://Scenes/illusion.gd" id="1_t3jq6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8h5c7"]
+atlas = ExtResource("1_t2bkg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ule5"]
+atlas = ExtResource("1_t2bkg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpyo7"]
+atlas = ExtResource("1_t2bkg")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hryuu"]
+atlas = ExtResource("1_t2bkg")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s5a5l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8h5c7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ule5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpyo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hryuu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2hjv"]
+radius = 5.0
+
+[node name="Illusion" type="Area2D"]
+script = ExtResource("1_t3jq6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s5a5l")
+frame = 3
+frame_progress = 0.266782
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g2hjv")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

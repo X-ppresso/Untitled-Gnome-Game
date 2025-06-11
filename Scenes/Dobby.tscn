@@ -87,4 +87,6 @@ rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_v3p6a")
 animation = &"run"
 
-[node name="Components" type="Node" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(0, 1)
