@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://pylcx5rd8k7o"]
 
 [ext_resource type="Texture2D" uid="uid://dlm6l16pen88g" path="res://Sprites/dobby-Recovered-Sheet.png" id="1_t2bkg"]
-[ext_resource type="Script" path="res://Scenes/illusion.gd" id="1_t3jq6"]
+[ext_resource type="Script" path="res://Scripts/illusion.gd" id="1_t3jq6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h5c7"]
 atlas = ExtResource("1_t2bkg")

@@ -15,6 +15,15 @@ run/main_scene="res://Scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[file_customization]
+
+folder_colors={
+"res://Scenes/": "red",
+"res://Scripts/": "orange",
+"res://Sprites/": "yellow",
+"res://Tilemap/": "green"
+}
+
 [input]
 
 Confirm={

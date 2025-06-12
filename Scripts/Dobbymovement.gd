@@ -42,6 +42,8 @@ func _physics_process(delta: float) -> void:
 	#biar nggak kecepeten klo jalan diagonal
 	if direction.length() > 1.0:
 		direction = direction.normalized()
+	if is_placing_distraction == true :
+		speed = 0
 	
 	# Make the character look at the mouse cursor
 	look_at(get_global_mouse_position())
@@ -57,7 +59,7 @@ var placement_camera: Camera2D = null
 var original_camera: Camera2D = null # Store a reference to the player's normal camera
 
 @onready var player_movement_component: Node = null
-@onready var ray_cast: RayCast2D = $RayCast2D
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 func _ready():
 	# Get a reference to the player's default camera
@@ -65,11 +67,6 @@ func _ready():
 	
 	player_movement_component = self
 	
-	# Initialize RayCast2D properties directly on the @onready variable
-	ray_cast.enabled = false # Disable initially
-	ray_cast.target_position = Vector2(0, 1) # Default cast downwards, will be updated to mouse position
-	# (Optional) Set up collision masks in the editor for the RayCast2D, or here:
-	# ray_cast.collision_mask = YOUR_WALL_AND_GROUND_LAYERS
 
 func _input(event):
 	if event.is_action_pressed("Ability_1") and not is_placing_distraction:
@@ -87,6 +84,7 @@ func _process(delta):
 
 func start_placement_mode():
 	is_placing_distraction = true
+	
 	#get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Hide and capture mouse for camera movement
 	
@@ -104,11 +102,7 @@ func start_placement_mode():
 	# Make preview dummy non-collidable and potentially transparent/ghostly
 	if preview_dummy.has_method("set_preview_mode"):
 		preview_dummy.set_preview_mode(true) # A custom method you'll add to DistractionDummy.gd
-
-	# 3. Enable raycast for placement
-	ray_cast.enabled = true
-	# Configure ray_cast (adjust collision masks to detect walls/ground)
-	# ray_cast.collision_mask = YOUR_WALL_AND_GROUND_LAYERS # Set this in the Inspector or code
+	
 
 func update_placement_preview():
 	if not is_instance_valid(preview_dummy): return
@@ -117,55 +111,21 @@ func update_placement_preview():
 	# Set its position to the camera's global position.
 	preview_dummy.global_position = placement_camera.global_position
 
-	# --- RayCast2D setup ---
-	# Raycast origin is the camera's center
-	ray_cast.global_position = placement_camera.global_position
+	 # Check placement validity using the preview_dummy's Area2D overlap detection
+	var has_obstacle_overlap = preview_dummy.is_overlapping_obstacle()
 
-	# Raycast target is a short distance downwards (or in the camera's default forward direction if your game has a concept of 'forward')
-	# Adjust this Vector2(0, 50) based on how far down you expect the ground to be from the camera's center.
-	# It should be long enough to hit the ground but not so long it passes through objects you want to detect.
-	ray_cast.target_position = Vector2(0, 0) # Example: 50 pixels directly downwards from camera center
+	# Check if within placement range from the player's actual position
+	var player_global_pos = global_position # Your player's actual global position
+	var distance_to_player = player_global_pos.distance_to(preview_dummy.global_position)
+	var is_in_range = distance_to_player <= placement_range
 
-	ray_cast.force_raycast_update() # Ensure raycast is updated immediately
-
-	var can_place = false
-	var hit_point = placement_camera.global_position # Default to camera center if no collision
-
-	if ray_cast.is_colliding():
-		hit_point = ray_cast.get_collision_point()
-		var collider = ray_cast.get_collider()
-
-		# Check if hitting a "wall" or valid ground (using collision layers/groups)
-		# Assuming Layer 2 is "Walls" and Layer 3 is "Ground"
-		var is_valid_surface = false
-		if collider:
-			# Check if it's explicitly part of the ground layer (or not a wall layer)
-			if collider.get_collision_layer_value(3): # Assuming layer 3 is "Ground"
-				is_valid_surface = true
-			elif collider.is_in_group("Ground"):
-				is_valid_surface = true
-			# Explicitly check if it's a wall and invalidate
-			if collider.get_collision_layer_value(2) or collider.is_in_group("Walls"): # Assuming layer 2 is "Walls"
-				is_valid_surface = false
-
-		# Check if within placement range from the player's actual position
-		var player_global_pos = global_position # Your player's actual global position
-		var distance_to_player = player_global_pos.distance_to(hit_point)
-		var is_in_range = distance_to_player <= placement_range
-
-		can_place = is_in_range and is_valid_surface
-
-	# Set preview dummy position to the hit point, or camera center if no collision
-	# This places the dummy *on* the detected surface
-	preview_dummy.global_position = hit_point
+	var can_place = is_in_range and not has_obstacle_overlap # Valid if in range AND no obstacles
 
 	# Update preview material based on placement validity
 	if can_place:
-		if preview_dummy.has_method("set_valid_placement_material"):
-			preview_dummy.set_valid_placement_material()
+		preview_dummy.set_valid_placement_material()
 	else:
-		if preview_dummy.has_method("set_invalid_placement_material"):
-			preview_dummy.set_invalid_placement_material()
+		preview_dummy.set_invalid_placement_material()
 
 # handle_placement_camera_movement(delta) remains the same as it moves the camera (and thus the dummy preview)
 
@@ -184,37 +144,28 @@ func handle_placement_camera_movement(delta):
 	placement_camera.global_position += move_direction.normalized() * camera_move_speed * delta
 
 func confirm_placement():
-	if is_instance_valid(preview_dummy) and ray_cast.is_colliding():
-		var hit_point = ray_cast.get_collision_point()
-		var player_global_pos = global_position
-		var distance_to_player = player_global_pos.distance_to(hit_point)
+	if not is_instance_valid(preview_dummy):
+		print("No preview dummy to place.")
+		return
 
-		# Re-check placement validity before confirming (same logic as in update_placement_preview)
-		var collider = ray_cast.get_collider()
-		var is_valid_surface = true # Assume valid
+	
+	# Re-check placement validity before confirming
+	var has_obstacle_overlap = preview_dummy.is_overlapping_obstacle()
+	var player_global_pos = global_position
+	var distance_to_player = player_global_pos.distance_to(preview_dummy.global_position)
+	var is_in_range = distance_to_player <= placement_range
 
-		if collider and collider.get_collision_layer_value(2): # Assuming layer 2 is "Walls"
-			is_valid_surface = false
-		if collider and collider.is_in_group("Walls"):
-			is_valid_surface = false
+	if is_in_range and not has_obstacle_overlap:
+		var actual_dummy = distraction_dummy_scene.instantiate()
+		get_tree().root.add_child(actual_dummy)
+		actual_dummy.global_position = preview_dummy.global_position # Place at preview's final position
+		
+		actual_dummy.set_preview_mode(false) # Reset from preview mode
+		actual_dummy.start_distraction(distraction_duration)
 
-		if distance_to_player <= placement_range and is_valid_surface:
-			# Instantiate the actual dummy
-			var actual_dummy = distraction_dummy_scene.instantiate()
-			get_tree().root.add_child(actual_dummy)
-			actual_dummy.global_position = hit_point
-			# Reset actual dummy from preview mode
-			if actual_dummy.has_method("set_preview_mode"):
-				actual_dummy.set_preview_mode(false)
-			if actual_dummy.has_method("start_distraction"):
-				actual_dummy.start_distraction(distraction_duration)
-
-			# Clean up preview and exit mode
-			end_placement_mode()
-		else:
-			print("Cannot place here (out of range or invalid surface).")
+		end_placement_mode()
 	else:
-		print("No valid placement detected.")
+		print("Cannot place dummy here (out of range or invalid surface).")
 
 func cancel_placement():
 	end_placement_mode()
@@ -235,5 +186,3 @@ func end_placement_mode():
 	
 	if is_instance_valid(original_camera):
 		original_camera.enabled = true # Reactivate player's normal camera
-
-	ray_cast.enabled = false # Disable raycast
