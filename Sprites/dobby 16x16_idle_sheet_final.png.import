@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlm6l16pen88g"
-path="res://.godot/imported/dobby-Recovered-Sheet.png-41d29857fbda38ea0f754c84714b76f3.ctex"
+uid="uid://c8w2vk2bhmjrl"
+path="res://.godot/imported/dobby 16x16_idle_sheet_final.png-1704636b2a82b7e4a3eb6f0ea74b71df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/dobby-Recovered-Sheet.png"
-dest_files=["res://.godot/imported/dobby-Recovered-Sheet.png-41d29857fbda38ea0f754c84714b76f3.ctex"]
+source_file="res://Sprites/dobby 16x16_idle_sheet_final.png"
+dest_files=["res://.godot/imported/dobby 16x16_idle_sheet_final.png-1704636b2a82b7e4a3eb6f0ea74b71df.ctex"]
 
 [params]
 

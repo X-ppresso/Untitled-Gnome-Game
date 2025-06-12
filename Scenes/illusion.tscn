@@ -1,44 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://pylcx5rd8k7o"]
+[gd_scene load_steps=5 format=3 uid="uid://pylcx5rd8k7o"]
 
-[ext_resource type="Texture2D" uid="uid://dlm6l16pen88g" path="res://Sprites/dobby-Recovered-Sheet.png" id="1_t2bkg"]
 [ext_resource type="Script" path="res://Scripts/illusion.gd" id="1_t3jq6"]
 [ext_resource type="Texture2D" uid="uid://catobeqal1lod" path="res://icon.svg" id="3_nwwuk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8h5c7"]
-atlas = ExtResource("1_t2bkg")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ule5"]
-atlas = ExtResource("1_t2bkg")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xpyo7"]
-atlas = ExtResource("1_t2bkg")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hryuu"]
-atlas = ExtResource("1_t2bkg")
-region = Rect2(48, 0, 16, 16)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_s5a5l"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8h5c7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4ule5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xpyo7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hryuu")
-}],
-"loop": true,
-"name": &"default",
-"speed": 24.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_nwwuk")

@@ -26,14 +26,14 @@ func _physics_process(delta: float) -> void:
 	elif is_moving: # Check if any directional input is being pressed
 		$AnimatedSprite2D.play("walk")
 	else:
-		$AnimatedSprite2D.stop() # Stop animation if no relevant input
+		$AnimatedSprite2D.play("idle") # Stop animation if no relevant input
 	
 	
 	# Smooth the velocity using lerp.
 	velocity = lerp(velocity, target_velocity, acceleration * delta)
 	
 	if Input.is_action_pressed("run"):
-		speed = 250
+		speed = 175
 	else: 
 		speed =100
 	
@@ -85,6 +85,8 @@ func _process(delta):
 func start_placement_mode():
 	is_placing_distraction = true
 	
+	$AnimatedSprite2D.play("cast")
+	
 	#get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Hide and capture mouse for camera movement
 	
@@ -132,7 +134,7 @@ func update_placement_preview():
 func handle_placement_camera_movement(delta):
 	if not is_instance_valid(placement_camera): return
 
-	var camera_move_speed = 200.0 # Adjust pixels per second
+	var camera_move_speed = 150.0 # Adjust pixels per second
 	var move_direction = Vector2.ZERO
 
 	# WASD movement for camera
