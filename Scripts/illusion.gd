@@ -14,6 +14,7 @@ var distraction_duration: float = 0.0
 
 var overlapping_obstacles: int = 0 # Counter for overlapping bodies/areas
 
+const WALLS_LAYER = 2
 
 func _ready():
 	# Connect the timer's timeout signal
@@ -63,34 +64,26 @@ func set_preview_mode(is_active: bool):
 		# Clear any existing overlaps
 		overlapping_obstacles = 0
 
-
-# Call these methods when a body/area enters/exits the preview dummy's Area2D
 func _on_body_entered_obstacle(body: Node2D):
-	if is_preview: # Only count overlaps if in preview mode
-		# Check if the entered body is an obstacle (e.g., in "Walls" group or on "Walls" layer)
-		if body.is_in_group("Walls") or body.get_collision_layer_value(2): # Assuming Layer 2 is Walls
-			overlapping_obstacles += 1
-			# print("Preview entered obstacle: ", body.name, " current overlaps: ", overlapping_obstacles)
+	if is_preview:
+		overlapping_obstacles += 1
+		# print("Preview entered obstacle: ", body.name, " current overlaps: ", overlapping_obstacles)
 
 func _on_body_exited_obstacle(body: Node2D):
 	if is_preview:
-		if body.is_in_group("Walls") or body.get_collision_layer_value(2):
-			overlapping_obstacles -= 1
-			# print("Preview exited obstacle: ", body.name, " current overlaps: ", overlapping_obstacles)
+		overlapping_obstacles -= 1
+		# print("Preview exited obstacle: ", body.name, " current overlaps: ", overlapping_obstacles)
 
 func _on_area_entered_obstacle(area: Area2D):
 	if is_preview:
-		if area.is_in_group("Walls") or area.get_collision_layer_value(2): # If your walls are Area2Ds
-			overlapping_obstacles += 1
+		overlapping_obstacles += 1
 
 func _on_area_exited_obstacle(area: Area2D):
 	if is_preview:
-		if area.is_in_group("Walls") or area.get_collision_layer_value(2):
-			overlapping_obstacles -= 1
+		overlapping_obstacles -= 1
 
 func is_overlapping_obstacle() -> bool:
 	return overlapping_obstacles > 0
-
 
 func start_distraction(duration: float):
 	distraction_duration = duration

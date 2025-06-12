@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://pylcx5rd8k7o"]
+[gd_scene load_steps=10 format=3 uid="uid://pylcx5rd8k7o"]
 
 [ext_resource type="Texture2D" uid="uid://dlm6l16pen88g" path="res://Sprites/dobby-Recovered-Sheet.png" id="1_t2bkg"]
 [ext_resource type="Script" path="res://Scripts/illusion.gd" id="1_t3jq6"]
+[ext_resource type="Texture2D" uid="uid://catobeqal1lod" path="res://icon.svg" id="3_nwwuk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h5c7"]
 atlas = ExtResource("1_t2bkg")
@@ -37,18 +38,28 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nwwuk")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2hjv"]
 radius = 5.0
 
 [node name="Illusion" type="Area2D"]
+collision_layer = 16
+collision_mask = 18
 script = ExtResource("1_t3jq6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_s5a5l")
-frame = 3
-frame_progress = 0.266782
+animation = &"new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_g2hjv")

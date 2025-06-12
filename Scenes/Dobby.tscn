@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://v6t73n2jf2xb"]
 
-[ext_resource type="Script" path="res://Scripts/Dobbymovement.gd" id="1_7y735"]
+[ext_resource type="Script" path="res://Scripts/Dobby.gd" id="1_7y735"]
 [ext_resource type="PackedScene" uid="uid://pylcx5rd8k7o" path="res://Scenes/illusion.tscn" id="2_1nwm4"]
 [ext_resource type="Texture2D" uid="uid://dlm6l16pen88g" path="res://Sprites/dobby-Recovered-Sheet.png" id="2_gnhvc"]
 [ext_resource type="PackedScene" uid="uid://b3r8vnwofy55d" path="res://Scenes/placement_camera.tscn" id="3_mn8jy"]
@@ -78,6 +78,7 @@ animations = [{
 }]
 
 [node name="Dobby" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_7y735")
 distraction_dummy_scene = ExtResource("2_1nwm4")
 placement_camera_scene = ExtResource("3_mn8jy")
