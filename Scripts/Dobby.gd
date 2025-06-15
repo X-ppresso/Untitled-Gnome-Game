@@ -53,6 +53,8 @@ func _physics_process(delta: float) -> void:
 @export var placement_range: float = 300.0 # Max pixel distance to place the dummy
 @export var distraction_duration: float = 10.0 # How long the dummy lasts (in seconds)
 
+var illusion_in_cooldown: bool = false
+var disguise_in_cooldown: bool = false
 var is_placing_distraction: bool = false
 var preview_dummy: Node2D = null
 var placement_camera: Camera2D = null
@@ -67,15 +69,19 @@ func _ready():
 	
 	player_movement_component = self
 	
-
 func _input(event):
-	if event.is_action_pressed("Ability_1") and not is_placing_distraction:
+	if event.is_action_pressed("Ability_1") and not is_placing_distraction and not illusion_in_cooldown:
 		start_placement_mode()
+	elif event.is_action_pressed("Ability_1") and illusion_in_cooldown:
+		print("sabar ajg")
 	elif is_placing_distraction:
 		if event.is_action_pressed("Confirm"):
 			confirm_placement()
 		elif event.is_action_pressed("Cancel"):
-			cancel_placement()
+			end_placement_mode()
+	
+	#if event.is_action_pressed("Ability_2") and not is_placing_distraction:
+		#start_disguise()
 
 func _process(delta):
 	if is_placing_distraction:
@@ -164,13 +170,13 @@ func confirm_placement():
 		
 		actual_dummy.set_preview_mode(false) # Reset from preview mode
 		actual_dummy.start_distraction(distraction_duration)
+		illusion_in_cooldown = true
+		$"Illusion cooldown".start()
+		
 
 		end_placement_mode()
 	else:
 		print("Cannot place dummy here (out of range or invalid surface).")
-
-func cancel_placement():
-	end_placement_mode()
 
 func end_placement_mode():
 	is_placing_distraction = false
@@ -188,3 +194,7 @@ func end_placement_mode():
 	
 	if is_instance_valid(original_camera):
 		original_camera.enabled = true # Reactivate player's normal camera
+
+
+func _on_illusion_cooldown_timeout() -> void:
+	illusion_in_cooldown = false

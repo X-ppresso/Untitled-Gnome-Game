@@ -17,8 +17,6 @@ var overlapping_obstacles: int = 0 # Counter for overlapping bodies/areas
 const WALLS_LAYER = 2
 
 func _ready():
-	# Connect the timer's timeout signal
-	life_timer.timeout.connect(on_life_timer_timeout)
 # Connect signals for overlapping bodies/areas (if you haven't already)
 	body_entered.connect(_on_body_entered_obstacle)
 	body_exited.connect(_on_body_exited_obstacle)
@@ -86,12 +84,10 @@ func is_overlapping_obstacle() -> bool:
 	return overlapping_obstacles > 0
 
 func start_distraction(duration: float):
-	distraction_duration = duration
-	life_timer.wait_time = distraction_duration
-	life_timer.start()
+	$LifeTimer.start()
 	print("Distraction dummy placed at: ", global_position)
 
-func on_life_timer_timeout():
+func _on_life_timer_timeout() -> void:
 	print("Distraction dummy vanished!")
 	queue_free()
 
