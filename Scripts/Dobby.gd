@@ -95,7 +95,6 @@ func _process(delta):
 
 var player_start_placement_pos: Vector2
 
-
 func start_placement_mode():
 	is_placing_distraction = true
 	
