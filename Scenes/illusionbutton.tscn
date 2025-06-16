@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b2or17h15yhe4"]
+
+[node name="Illusionbutton" type="TextureButton"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.803922)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 3
+
+[node name="Timer" type="Timer" parent="TextureProgressBar"]
+one_shot = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2

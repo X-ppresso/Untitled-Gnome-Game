@@ -2,3 +2,6 @@
 
 [node name="Camera2D" type="Camera2D"]
 zoom = Vector2(4, 4)
+process_callback = 0
+limit_smoothed = true
+editor_draw_limits = true

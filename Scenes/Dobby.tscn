@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://v6t73n2jf2xb"]
+[gd_scene load_steps=22 format=3 uid="uid://v6t73n2jf2xb"]
 
 [ext_resource type="Script" path="res://Scripts/Dobby.gd" id="1_7y735"]
 [ext_resource type="PackedScene" uid="uid://pylcx5rd8k7o" path="res://Scenes/illusion.tscn" id="2_1nwm4"]
@@ -104,7 +104,34 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_t2rhf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vrg6x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pdmct"]
+distance = -100.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p4ojk"]
+normal = Vector2(0, 1)
+distance = -100.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1i7us"]
+normal = Vector2(-1, 0)
+distance = -100.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2b8od"]
+normal = Vector2(1, 0)
+distance = -100.0
+
 [node name="Dobby" type="CharacterBody2D"]
+position = Vector2(2, 0)
 collision_mask = 3
 script = ExtResource("1_7y735")
 distraction_dummy_scene = ExtResource("2_1nwm4")
@@ -113,14 +140,43 @@ placement_camera_scene = ExtResource("3_mn8jy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3gn5t")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Dobby_anim" type="AnimatedSprite2D" parent="."]
 position = Vector2(3.8147e-06, -1.90735e-06)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_v3p6a")
 animation = &"idle"
 
+[node name="disguise" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_t2rhf")
+
 [node name="Illusion cooldown" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
 
+[node name="Disguise cooldown" type="Timer" parent="."]
+wait_time = 20.0
+
+[node name="Disguise timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="disguiserange" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="bottomlimit" type="CollisionShape2D" parent="disguiserange"]
+shape = SubResource("WorldBoundaryShape2D_pdmct")
+
+[node name="toplimit" type="CollisionShape2D" parent="disguiserange"]
+shape = SubResource("WorldBoundaryShape2D_p4ojk")
+
+[node name="rightlimit" type="CollisionShape2D" parent="disguiserange"]
+shape = SubResource("WorldBoundaryShape2D_1i7us")
+
+[node name="left limit" type="CollisionShape2D" parent="disguiserange"]
+shape = SubResource("WorldBoundaryShape2D_2b8od")
+
 [connection signal="timeout" from="Illusion cooldown" to="." method="_on_illusion_cooldown_timeout"]
+[connection signal="timeout" from="Disguise cooldown" to="." method="_on_disguise_cooldown_timeout"]
+[connection signal="timeout" from="Disguise timer" to="." method="_on_disguise_timer_timeout"]

@@ -3,7 +3,7 @@
 extends Area2D
 
 @onready var life_timer: Timer = $LifeTimer
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D # Adjust path to your Sprite2D node
+@onready var sprite: AnimatedSprite2D = $Illusion_idle# Adjust path to your Sprite2D node
 
 @export var default_modulate: Color = Color(1, 1, 1, 1) # Opaque white
 @export var preview_valid_modulate: Color = Color(0.5, 1, 0.5, 0.5) # Semi-transparent green
@@ -42,7 +42,7 @@ func set_preview_mode(is_active: bool):
 		set_collision_layer_value(5, true) # Enable PreviewDummy layer
 		set_collision_mask_value(2, true)  # Detect Walls (Layer 2)
 		# Disable detection of NPCs (Layer 4) for preview
-		set_collision_mask_value(4, false) # Assuming NPCs are Layer 4
+		set_collision_mask_value(4, true) # Assuming NPCs are Layer 4
 		monitorable = true # Should be true for collision detection
 		
 		# Reset overlap counter when entering preview mode

@@ -15,13 +15,19 @@ run/main_scene="res://Scenes/Game testing.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [file_customization]
 
 folder_colors={
 "res://Scenes/": "red",
 "res://Scripts/": "orange",
-"res://Sprites/": "yellow",
-"res://Tilemap/": "green"
+"res://Shaders/": "yellow",
+"res://Sprites/": "green",
+"res://Tilemap/": "teal"
 }
 
 [input]

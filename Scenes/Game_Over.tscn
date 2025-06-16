@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bwb1sm8j0jt65"]
+
+[node name="Game_Over" type="CanvasLayer"]
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 473.0
+offset_top = 412.0
+offset_right = 793.0
+offset_bottom = 484.0
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(0.729412, 0.811765, 1, 1)
+offset_left = -28.0
+offset_top = -14.0
+offset_right = 1178.0
+offset_bottom = 668.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 338.0
+offset_top = 109.0
+offset_right = 802.0
+offset_bottom = 216.0
+theme_override_font_sizes/font_size = 72
+text = "RIP skill issue"

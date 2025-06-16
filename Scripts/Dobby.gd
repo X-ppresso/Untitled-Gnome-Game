@@ -3,9 +3,6 @@ extends CharacterBody2D
 # Movement speed of the character in pixels per second.
 @export var speed = 200
 
-# multiplier speed klo lari
-@export var run_speed_multiplier = 1.75
-
 # How quickly the character speeds up. Higher values are more responsive.
 @export var acceleration = 10
 
@@ -21,12 +18,14 @@ func _physics_process(delta: float) -> void:
 	# Set the target velocity based on input and speed.
 	var target_velocity: Vector2 = direction * speed
 
-	if Input.is_action_pressed("run") and is_moving: 
-		$AnimatedSprite2D.play("run")
-	elif is_moving: # Check if any directional input is being pressed
-		$AnimatedSprite2D.play("walk")
+	if Input.is_action_pressed("run") and is_moving and not is_placing_distraction: 
+		$Dobby_anim.play("run")
+	elif is_moving and not is_placing_distraction: # Check if any directional input is being pressed
+		$Dobby_anim.play("walk")
+	elif is_placing_distraction:
+		$Dobby_anim.play("cast")
 	else:
-		$AnimatedSprite2D.play("idle") # Stop animation if no relevant input
+		$Dobby_anim.play("idle") # Stop animation if no relevant input
 	
 	
 	# Smooth the velocity using lerp.
@@ -50,12 +49,13 @@ func _physics_process(delta: float) -> void:
 
 @export var distraction_dummy_scene: PackedScene # Assign your DistractionDummy.tscn here
 @export var placement_camera_scene: PackedScene # A separate Camera2D scene for placement
-@export var placement_range: float = 300.0 # Max pixel distance to place the dummy
+@export var placement_range: float = 120.0 # Max pixel distance to place the dummy
 @export var distraction_duration: float = 10.0 # How long the dummy lasts (in seconds)
 
 var illusion_in_cooldown: bool = false
 var disguise_in_cooldown: bool = false
 var is_placing_distraction: bool = false
+var is_in_disguise: bool = false
 var preview_dummy: Node2D = null
 var placement_camera: Camera2D = null
 var original_camera: Camera2D = null # Store a reference to the player's normal camera
@@ -70,15 +70,20 @@ func _ready():
 	player_movement_component = self
 	
 func _input(event):
-	if event.is_action_pressed("Ability_1") and not is_placing_distraction and not illusion_in_cooldown:
+	if event.is_action_pressed("Ability_1") and not is_placing_distraction and not illusion_in_cooldown and not is_in_disguise:
 		start_placement_mode()
 	elif event.is_action_pressed("Ability_1") and illusion_in_cooldown:
 		print("sabar ajg")
+	elif event.is_action_pressed("Ability_1") and is_in_disguise:
+		print("tak bole campur skill bang hehe")
 	elif is_placing_distraction:
 		if event.is_action_pressed("Confirm"):
 			confirm_placement()
 		elif event.is_action_pressed("Cancel"):
 			end_placement_mode()
+	if event.is_action_pressed("Ability_2") and not is_placing_distraction and not disguise_in_cooldown:
+		enter_disguise_mode()
+
 	
 	#if event.is_action_pressed("Ability_2") and not is_placing_distraction:
 		#start_disguise()
@@ -88,10 +93,15 @@ func _process(delta):
 		update_placement_preview()
 		handle_placement_camera_movement(delta)
 
+var player_start_placement_pos: Vector2
+
+
 func start_placement_mode():
 	is_placing_distraction = true
 	
-	$AnimatedSprite2D.play("cast")
+	$Dobby_anim.play("cast")
+	
+	player_start_placement_pos = global_position # Your player's actual global position
 	
 	#get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Hide and capture mouse for camera movement
@@ -149,7 +159,18 @@ func handle_placement_camera_movement(delta):
 	if Input.is_action_pressed("left"): move_direction.x -= 1
 	if Input.is_action_pressed("right"): move_direction.x += 1
 
-	placement_camera.global_position += move_direction.normalized() * camera_move_speed * delta
+	var current_camera_pos = placement_camera.global_position
+	var new_camera_pos = current_camera_pos + move_direction.normalized() * camera_move_speed * delta
+
+	# --- CLAMPING TO A CIRCULAR RANGE ---
+	var vector_from_player_start = new_camera_pos - player_start_placement_pos
+	var current_distance = vector_from_player_start.length()
+
+	if current_distance > placement_range: # Use your existing placement_range variable
+		# Normalize the vector, scale it by the max range, and add back player's start pos
+		new_camera_pos = player_start_placement_pos + vector_from_player_start.normalized() * placement_range
+
+	placement_camera.global_position = new_camera_pos
 
 func confirm_placement():
 	if not is_instance_valid(preview_dummy):
@@ -172,8 +193,6 @@ func confirm_placement():
 		actual_dummy.start_distraction(distraction_duration)
 		illusion_in_cooldown = true
 		$"Illusion cooldown".start()
-		
-
 		end_placement_mode()
 	else:
 		print("Cannot place dummy here (out of range or invalid surface).")
@@ -195,6 +214,24 @@ func end_placement_mode():
 	if is_instance_valid(original_camera):
 		original_camera.enabled = true # Reactivate player's normal camera
 
-
 func _on_illusion_cooldown_timeout() -> void:
 	illusion_in_cooldown = false
+
+func enter_disguise_mode():
+	is_in_disguise = true
+	disguise_in_cooldown = true
+	$Dobby_anim.visible = false
+	$disguise.visible = true
+	$"Disguise timer".start()
+	$"Disguise cooldown".start()
+
+func exit_disguise_mode():
+	is_in_disguise = false
+	$Dobby_anim.visible = true
+	$disguise.visible = false
+
+func _on_disguise_timer_timeout() -> void:
+	exit_disguise_mode()
+
+func _on_disguise_cooldown_timeout() -> void:
+	disguise_in_cooldown = false
