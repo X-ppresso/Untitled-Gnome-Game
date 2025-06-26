@@ -9,6 +9,17 @@ extends CharacterBody2D
 # How quickly the character slows down. Higher values mean less sliding.
 @export var friction = 10
 
+@onready var interaction_area: Area2D = $Steal # Path to player's steal range
+@onready var mouse_ray_cast: RayCast2D = $MouseRayCast 
+
+var _interactable_npcs: Array[Node] = [] # Stores NPCs currently in range
+
+func _on_steal_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
+
+func _on_steal_body_exited(body: Node2D) -> void:
+	pass # Replace with function body.
+
 #movement stuff
 func _physics_process(delta: float) -> void:
 	# Handle player movement
@@ -68,6 +79,7 @@ func _ready():
 	original_camera = $Dobbycam # Replace with the actual path to your player's Camera2D
 	
 	player_movement_component = self
+	
 	
 func _input(event):
 	if event.is_action_pressed("Ability_1") and not is_placing_distraction and not illusion_in_cooldown and not is_in_disguise:

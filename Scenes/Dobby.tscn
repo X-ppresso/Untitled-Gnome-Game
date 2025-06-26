@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://v6t73n2jf2xb"]
+[gd_scene load_steps=19 format=3 uid="uid://v6t73n2jf2xb"]
 
 [ext_resource type="Script" path="res://Scripts/Dobby.gd" id="1_7y735"]
 [ext_resource type="PackedScene" uid="uid://pylcx5rd8k7o" path="res://Scenes/illusion.tscn" id="2_1nwm4"]
@@ -115,20 +115,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pdmct"]
-distance = -100.0
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p4ojk"]
-normal = Vector2(0, 1)
-distance = -100.0
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1i7us"]
-normal = Vector2(-1, 0)
-distance = -100.0
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2b8od"]
-normal = Vector2(1, 0)
-distance = -100.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_4nybe"]
+radius = 17.0294
 
 [node name="Dobby" type="CharacterBody2D"]
 position = Vector2(2, 0)
@@ -161,22 +149,17 @@ wait_time = 20.0
 wait_time = 3.0
 one_shot = true
 
-[node name="disguiserange" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 16
+[node name="Steal" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 8
 
-[node name="bottomlimit" type="CollisionShape2D" parent="disguiserange"]
-shape = SubResource("WorldBoundaryShape2D_pdmct")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Steal"]
+shape = SubResource("CircleShape2D_4nybe")
 
-[node name="toplimit" type="CollisionShape2D" parent="disguiserange"]
-shape = SubResource("WorldBoundaryShape2D_p4ojk")
-
-[node name="rightlimit" type="CollisionShape2D" parent="disguiserange"]
-shape = SubResource("WorldBoundaryShape2D_1i7us")
-
-[node name="left limit" type="CollisionShape2D" parent="disguiserange"]
-shape = SubResource("WorldBoundaryShape2D_2b8od")
+[node name="MouseRayCast" type="RayCast2D" parent="."]
 
 [connection signal="timeout" from="Illusion cooldown" to="." method="_on_illusion_cooldown_timeout"]
 [connection signal="timeout" from="Disguise cooldown" to="." method="_on_disguise_cooldown_timeout"]
 [connection signal="timeout" from="Disguise timer" to="." method="_on_disguise_timer_timeout"]
+[connection signal="body_entered" from="Steal" to="." method="_on_steal_body_entered"]
+[connection signal="body_exited" from="Steal" to="." method="_on_steal_body_exited"]
