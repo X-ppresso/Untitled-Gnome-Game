@@ -86,6 +86,7 @@ func is_overlapping_obstacle() -> bool:
 func start_distraction(duration: float):
 	$LifeTimer.start()
 	print("Distraction dummy placed at: ", global_position)
+	$Illusion_idle.play("idle")
 
 func _on_life_timer_timeout() -> void:
 	print("Distraction dummy vanished!")

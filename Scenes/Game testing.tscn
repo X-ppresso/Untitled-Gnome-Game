@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://cr6jwkjad8sgo"]
+[gd_scene load_steps=8 format=4 uid="uid://cr6jwkjad8sgo"]
 
 [ext_resource type="PackedScene" uid="uid://v6t73n2jf2xb" path="res://Scenes/Dobby.tscn" id="1_36c1k"]
 [ext_resource type="Texture2D" uid="uid://wvk8laydvfvw" path="res://Shaders/2d_lights_and_shadows_neutral_po.jpg" id="2_hw3uu"]
 [ext_resource type="Texture2D" uid="uid://cro76n3qdjt7w" path="res://Tilemap/Tileset.png" id="2_ps0ox"]
 [ext_resource type="PackedScene" uid="uid://c4nnkyvx66n27" path="res://Scenes/NPC.tscn" id="3_pkual"]
+[ext_resource type="PackedScene" uid="uid://lqijwakbvmo5" path="res://Scenes/kei.tscn" id="5_duma5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sagmi"]
 texture = ExtResource("2_ps0ox")
@@ -284,4 +285,7 @@ position = Vector2(77, -38)
 position = Vector2(35, -39)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.205509, 0.325576, 0.558649, 1)
+color = Color(0.205509, 0.325576, 0.55865, 1)
+
+[node name="Kei" parent="." instance=ExtResource("5_duma5")]
+position = Vector2(-17, -28)

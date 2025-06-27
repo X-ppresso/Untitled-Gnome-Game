@@ -1,7 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://pylcx5rd8k7o"]
+[gd_scene load_steps=17 format=3 uid="uid://pylcx5rd8k7o"]
 
 [ext_resource type="Script" path="res://Scripts/illusion.gd" id="1_t3jq6"]
 [ext_resource type="Texture2D" uid="uid://bjqls2y0nynwk" path="res://Sprites/dobby-ability.png" id="2_7had3"]
+[ext_resource type="Shader" uid="uid://de1mxawcbvo43" path="res://Shaders/Scanline.tres" id="2_eygyy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5eitf"]
+shader = ExtResource("2_eygyy")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4spwj"]
 atlas = ExtResource("2_7had3")
@@ -77,7 +81,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_3hw1x")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"idle",
 "speed": 5.0
 }]
 
@@ -90,9 +94,10 @@ collision_mask = 10
 script = ExtResource("1_t3jq6")
 
 [node name="Illusion_idle" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_5eitf")
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_s5a5l")
-animation = &"new_animation"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_g2hjv")

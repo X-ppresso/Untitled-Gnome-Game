@@ -39,7 +39,7 @@ void fragment() {
 		}
 
 		float alpha = 0.0;
-		
+
 		for (float y = 1.0; y <= outline_thickness; y++) {
 			for (float x = 0.0; x <= y; x++) {
 				if (length(vec2(x, y - 0.5)) > outline_thickness) break;
@@ -63,10 +63,10 @@ void fragment() {
 						if (1.0 - alpha < 0.0001) break;
 					}
 				}
-				
+
 				if (1.0 - alpha < 0.0001) break;
 			}
-				
+
 			if (1.0 - alpha < 0.0001) break;
 		}
 

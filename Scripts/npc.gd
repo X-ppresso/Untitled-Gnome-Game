@@ -10,3 +10,5 @@ var interact: Callable = func():
 func _ready() -> void:
 	randomize()
 	modulate = colors[randi() % colors.size()]
+	$NPC.play("idle")
+	$Outline.play("Idle")
