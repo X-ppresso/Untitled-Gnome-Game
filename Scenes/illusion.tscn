@@ -1,13 +1,80 @@
-[gd_scene load_steps=5 format=3 uid="uid://pylcx5rd8k7o"]
+[gd_scene load_steps=15 format=3 uid="uid://pylcx5rd8k7o"]
 
 [ext_resource type="Script" path="res://Scripts/illusion.gd" id="1_t3jq6"]
-[ext_resource type="Texture2D" uid="uid://catobeqal1lod" path="res://icon.svg" id="3_nwwuk"]
+[ext_resource type="Texture2D" uid="uid://bjqls2y0nynwk" path="res://Sprites/dobby-ability.png" id="2_7had3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4spwj"]
+atlas = ExtResource("2_7had3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htbop"]
+atlas = ExtResource("2_7had3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvgh1"]
+atlas = ExtResource("2_7had3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5vw4"]
+atlas = ExtResource("2_7had3")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7udrj"]
+atlas = ExtResource("2_7had3")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep6q6"]
+atlas = ExtResource("2_7had3")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vvyq"]
+atlas = ExtResource("2_7had3")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjrjc"]
+atlas = ExtResource("2_7had3")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8s60"]
+atlas = ExtResource("2_7had3")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hw1x"]
+atlas = ExtResource("2_7had3")
+region = Rect2(144, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_s5a5l"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_nwwuk")
+"texture": SubResource("AtlasTexture_4spwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htbop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvgh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5vw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7udrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep6q6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vvyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjrjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8s60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hw1x")
 }],
 "loop": true,
 "name": &"new_animation",
@@ -23,7 +90,7 @@ collision_mask = 10
 script = ExtResource("1_t3jq6")
 
 [node name="Illusion_idle" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.08, 0.08)
+rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_s5a5l")
 animation = &"new_animation"
 

@@ -1,14 +1,55 @@
-[gd_scene load_steps=19 format=3 uid="uid://v6t73n2jf2xb"]
+[gd_scene load_steps=30 format=3 uid="uid://v6t73n2jf2xb"]
 
 [ext_resource type="Script" path="res://Scripts/Dobby.gd" id="1_7y735"]
 [ext_resource type="PackedScene" uid="uid://pylcx5rd8k7o" path="res://Scenes/illusion.tscn" id="2_1nwm4"]
 [ext_resource type="PackedScene" uid="uid://b3r8vnwofy55d" path="res://Scenes/placement_camera.tscn" id="3_mn8jy"]
+[ext_resource type="Texture2D" uid="uid://bjqls2y0nynwk" path="res://Sprites/dobby-ability.png" id="4_h1dli"]
 [ext_resource type="Texture2D" uid="uid://buqjq3j3cbeu5" path="res://Sprites/dobby 16x16_run_sheet_final.png" id="4_kxc0c"]
 [ext_resource type="Texture2D" uid="uid://c8w2vk2bhmjrl" path="res://Sprites/dobby 16x16_idle_sheet_final.png" id="4_l0fkh"]
 [ext_resource type="Texture2D" uid="uid://catobeqal1lod" path="res://icon.svg" id="4_vrg6x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3gn5t"]
 radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6a6k"]
+atlas = ExtResource("4_h1dli")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1xc8"]
+atlas = ExtResource("4_h1dli")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iq8t"]
+atlas = ExtResource("4_h1dli")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvvdp"]
+atlas = ExtResource("4_h1dli")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqwao"]
+atlas = ExtResource("4_h1dli")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ksnn"]
+atlas = ExtResource("4_h1dli")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a3kv"]
+atlas = ExtResource("4_h1dli")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t404e"]
+atlas = ExtResource("4_h1dli")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spwf3"]
+atlas = ExtResource("4_h1dli")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj6v8"]
+atlas = ExtResource("4_h1dli")
+region = Rect2(144, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6udvq"]
 atlas = ExtResource("4_l0fkh")
@@ -46,7 +87,34 @@ region = Rect2(48, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_vrg6x")
+"texture": SubResource("AtlasTexture_i6a6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1xc8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7iq8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvvdp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqwao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ksnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a3kv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t404e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spwf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj6v8")
 }],
 "loop": true,
 "name": &"cast",
@@ -133,6 +201,7 @@ position = Vector2(3.8147e-06, -1.90735e-06)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_v3p6a")
 animation = &"idle"
+frame_progress = 0.91058
 
 [node name="disguise" type="AnimatedSprite2D" parent="."]
 visible = false
