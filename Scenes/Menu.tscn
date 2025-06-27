@@ -1,24 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwx7kawg3t8af"]
+[gd_scene load_steps=5 format=3 uid="uid://cwx7kawg3t8af"]
 
-[sub_resource type="Gradient" id="Gradient_e7cyh"]
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_ntlvg"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ga2ua"]
-gradient = SubResource("Gradient_e7cyh")
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_40p45"]
+size = Vector2(200, 50)
 
-[sub_resource type="Gradient" id="Gradient_v1g3i"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_eih7e"]
+size = Vector2(200, 50)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_l27t0"]
-gradient = SubResource("Gradient_v1g3i")
-
-[sub_resource type="Gradient" id="Gradient_0vnvr"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_o05yf"]
-gradient = SubResource("Gradient_0vnvr")
-
-[sub_resource type="Gradient" id="Gradient_rbuem"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ss5s6"]
-gradient = SubResource("Gradient_rbuem")
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sh3kj"]
+size = Vector2(200, 50)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -27,28 +18,32 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ntlvg")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 710.0
+offset_top = 349.0
+offset_right = 910.0
+offset_bottom = 507.0
+scale = Vector2(1.32001, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_direction = 1
 layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
 
-[node name="Button" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+[node name="Play" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_ga2ua")
-
-[node name="Stage" type="TextureButton" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_l27t0")
+texture_normal = SubResource("PlaceholderTexture2D_40p45")
 
 [node name="Settings" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_o05yf")
+texture_normal = SubResource("PlaceholderTexture2D_eih7e")
 
 [node name="Exit" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_ss5s6")
+texture_normal = SubResource("PlaceholderTexture2D_sh3kj")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
