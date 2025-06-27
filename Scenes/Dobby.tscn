@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://v6t73n2jf2xb"]
+[gd_scene load_steps=45 format=3 uid="uid://v6t73n2jf2xb"]
 
 [ext_resource type="Script" path="res://Scripts/Dobby.gd" id="1_7y735"]
 [ext_resource type="PackedScene" uid="uid://pylcx5rd8k7o" path="res://Scenes/illusion.tscn" id="2_1nwm4"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bjqls2y0nynwk" path="res://Sprites/dobby-ability.png" id="4_h1dli"]
 [ext_resource type="Texture2D" uid="uid://buqjq3j3cbeu5" path="res://Sprites/dobby 16x16_run_sheet_final.png" id="4_kxc0c"]
 [ext_resource type="Texture2D" uid="uid://c8w2vk2bhmjrl" path="res://Sprites/dobby 16x16_idle_sheet_final.png" id="4_l0fkh"]
-[ext_resource type="Texture2D" uid="uid://catobeqal1lod" path="res://icon.svg" id="4_vrg6x"]
+[ext_resource type="Texture2D" uid="uid://cinj4gg6imm2p" path="res://Sprites/npc_idle.png" id="7_g3mxd"]
+[ext_resource type="Texture2D" uid="uid://b8jrro1rxuy27" path="res://Sprites/npc_walk.png" id="8_yet8j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3gn5t"]
 radius = 5.0
@@ -172,19 +173,124 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xy8xo"]
+atlas = ExtResource("7_g3mxd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ef5ce"]
+atlas = ExtResource("7_g3mxd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj15q"]
+atlas = ExtResource("7_g3mxd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3agdw"]
+atlas = ExtResource("7_g3mxd")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0uaer"]
+atlas = ExtResource("8_yet8j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t26j5"]
+atlas = ExtResource("8_yet8j")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofckm"]
+atlas = ExtResource("8_yet8j")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io51g"]
+atlas = ExtResource("8_yet8j")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1krm"]
+atlas = ExtResource("8_yet8j")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w53t"]
+atlas = ExtResource("8_yet8j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qmgc"]
+atlas = ExtResource("8_yet8j")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kawq"]
+atlas = ExtResource("8_yet8j")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwtpd"]
+atlas = ExtResource("8_yet8j")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vm4r5"]
+atlas = ExtResource("8_yet8j")
+region = Rect2(128, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_t2rhf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_vrg6x")
+"texture": SubResource("AtlasTexture_xy8xo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ef5ce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj15q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3agdw")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0uaer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t26j5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofckm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_io51g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1krm")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4w53t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qmgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kawq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwtpd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vm4r5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4nybe"]
-radius = 17.0294
+radius = 15.0
 
 [node name="Dobby" type="CharacterBody2D"]
 position = Vector2(2, 0)
@@ -205,7 +311,11 @@ frame_progress = 0.91058
 
 [node name="disguise" type="AnimatedSprite2D" parent="."]
 visible = false
+position = Vector2(1, 1)
+rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_t2rhf")
+animation = &"walk"
+frame_progress = 0.70578
 
 [node name="Illusion cooldown" type="Timer" parent="."]
 wait_time = 10.0
@@ -226,6 +336,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_4nybe")
 
 [node name="MouseRayCast" type="RayCast2D" parent="."]
+collision_mask = 8
 
 [connection signal="timeout" from="Illusion cooldown" to="." method="_on_illusion_cooldown_timeout"]
 [connection signal="timeout" from="Disguise cooldown" to="." method="_on_disguise_cooldown_timeout"]

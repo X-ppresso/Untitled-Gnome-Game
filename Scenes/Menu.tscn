@@ -1,4 +1,24 @@
-[gd_scene format=3 uid="uid://cwx7kawg3t8af"]
+[gd_scene load_steps=9 format=3 uid="uid://cwx7kawg3t8af"]
+
+[sub_resource type="Gradient" id="Gradient_e7cyh"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ga2ua"]
+gradient = SubResource("Gradient_e7cyh")
+
+[sub_resource type="Gradient" id="Gradient_v1g3i"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l27t0"]
+gradient = SubResource("Gradient_v1g3i")
+
+[sub_resource type="Gradient" id="Gradient_0vnvr"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o05yf"]
+gradient = SubResource("Gradient_0vnvr")
+
+[sub_resource type="Gradient" id="Gradient_rbuem"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ss5s6"]
+gradient = SubResource("Gradient_rbuem")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -14,16 +34,21 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_direction = 1
 layout_mode = 2
 
 [node name="Button" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_ga2ua")
 
 [node name="Stage" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_l27t0")
 
 [node name="Settings" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_o05yf")
 
 [node name="Exit" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_ss5s6")

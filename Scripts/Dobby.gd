@@ -13,6 +13,7 @@ extends CharacterBody2D
 @onready var mouse_ray_cast: RayCast2D = $MouseRayCast 
 
 var _interactable_npcs: Array[Node] = [] # Stores NPCs currently in range
+var _hovered_npc: Node = null # NEW: Stores the NPC currently under the mouse
 
 func _on_steal_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
@@ -31,12 +32,15 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_pressed("run") and is_moving and not is_placing_distraction: 
 		$Dobby_anim.play("run")
+		$disguise.play("run")
 	elif is_moving and not is_placing_distraction: # Check if any directional input is being pressed
 		$Dobby_anim.play("walk")
+		$disguise.play("walk")
 	elif is_placing_distraction:
 		$Dobby_anim.play("cast")
 	else:
 		$Dobby_anim.play("idle") # Stop animation if no relevant input
+		$disguise.play("idle")
 	
 	
 	# Smooth the velocity using lerp.
@@ -80,6 +84,15 @@ func _ready():
 	
 	player_movement_component = self
 	
+	 # Connect signals from the InteractionArea
+	interaction_area.body_entered.connect(_on_interaction_area_body_entered)
+	interaction_area.body_exited.connect(_on_interaction_area_body_exited)
+	
+	 # Mouse RayCast2D setup
+	mouse_ray_cast.enabled = true # Keep it enabled always to detect hover
+	# Its position will be updated every frame in _process or _physics_process
+	# Its collision mask should detect only NPCs (Layer 4)
+	mouse_ray_cast.collision_mask = (1 << 3) # Assuming Layer 4 is NPCs (1 << (4-1))
 	
 func _input(event):
 	if event.is_action_pressed("Ability_1") and not is_placing_distraction and not illusion_in_cooldown and not is_in_disguise:
@@ -95,7 +108,9 @@ func _input(event):
 			end_placement_mode()
 	if event.is_action_pressed("Ability_2") and not is_placing_distraction and not disguise_in_cooldown:
 		enter_disguise_mode()
-
+		
+	if event.is_action_pressed("Confirm"):
+		pass
 	
 	#if event.is_action_pressed("Ability_2") and not is_placing_distraction:
 		#start_disguise()
@@ -104,6 +119,21 @@ func _process(delta):
 	if is_placing_distraction:
 		update_placement_preview()
 		handle_placement_camera_movement(delta)
+		
+ 
+func _on_interaction_area_body_entered(body: Node2D):
+	if body.is_in_group("NPC"):
+		if not _interactable_npcs.has(body):
+			_interactable_npcs.append(body)
+			print("NPC entered interaction range: ", body.name)
+			# You might update a UI prompt if this NPC is also hovered
+
+func _on_interaction_area_body_exited(body: Node2D):
+	if body.is_in_group("NPC"):
+		if _interactable_npcs.has(body):
+			_interactable_npcs.erase(body)
+			print("NPC exited interaction range: ", body.name)
+
 
 var player_start_placement_pos: Vector2
 
@@ -240,6 +270,7 @@ func exit_disguise_mode():
 	is_in_disguise = false
 	$Dobby_anim.visible = true
 	$disguise.visible = false
+	$"../Game_Over".game_over()
 
 func _on_disguise_timer_timeout() -> void:
 	exit_disguise_mode()

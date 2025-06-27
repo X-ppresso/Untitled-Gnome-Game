@@ -1,8 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://pylcx5rd8k7o"]
+[gd_scene load_steps=20 format=3 uid="uid://pylcx5rd8k7o"]
 
 [ext_resource type="Script" path="res://Scripts/illusion.gd" id="1_t3jq6"]
 [ext_resource type="Texture2D" uid="uid://bjqls2y0nynwk" path="res://Sprites/dobby-ability.png" id="2_7had3"]
 [ext_resource type="Shader" uid="uid://de1mxawcbvo43" path="res://Shaders/Scanline.tres" id="2_eygyy"]
+[ext_resource type="Shader" path="res://Shaders/illusion.gdshader" id="3_geebm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shoga"]
+shader = ExtResource("2_eygyy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8a6eg"]
+shader = ExtResource("3_geebm")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5eitf"]
 shader = ExtResource("2_eygyy")
@@ -92,6 +99,8 @@ radius = 5.0
 collision_layer = 16
 collision_mask = 10
 script = ExtResource("1_t3jq6")
+scan_shader_material = SubResource("ShaderMaterial_shoga")
+preview_shader_material = SubResource("ShaderMaterial_8a6eg")
 
 [node name="Illusion_idle" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_5eitf")
@@ -103,7 +112,7 @@ animation = &"idle"
 shape = SubResource("CircleShape2D_g2hjv")
 
 [node name="LifeTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 8.0
 one_shot = true
 
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

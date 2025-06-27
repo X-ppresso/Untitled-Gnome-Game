@@ -4,6 +4,10 @@ extends Area2D
 
 @onready var life_timer: Timer = $LifeTimer
 @onready var sprite: AnimatedSprite2D = $Illusion_idle# Adjust path to your Sprite2D node
+@onready var color_rect_node = $Illusion_idle
+
+@export var scan_shader_material:ShaderMaterial
+@export var preview_shader_material:ShaderMaterial
 
 @export var default_modulate: Color = Color(1, 1, 1, 1) # Opaque white
 @export var preview_valid_modulate: Color = Color(0.5, 1, 0.5, 0.5) # Semi-transparent green
@@ -33,6 +37,8 @@ func set_invalid_placement_material():
 
 func set_preview_mode(is_active: bool):
 	is_preview = is_active
+	
+	color_rect_node.material = preview_shader_material
 	
 	# When in preview mode, we only want to detect walls/obstacles for placement.
 	# We do NOT want it to trigger NPC distraction yet.
@@ -87,6 +93,7 @@ func start_distraction(duration: float):
 	$LifeTimer.start()
 	print("Distraction dummy placed at: ", global_position)
 	$Illusion_idle.play("idle")
+	color_rect_node.material = scan_shader_material
 
 func _on_life_timer_timeout() -> void:
 	print("Distraction dummy vanished!")

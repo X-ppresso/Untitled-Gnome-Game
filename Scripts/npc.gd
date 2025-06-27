@@ -12,3 +12,6 @@ func _ready() -> void:
 	modulate = colors[randi() % colors.size()]
 	$NPC.play("idle")
 	$Outline.play("Idle")
+
+func toggle_outline():
+	$Outline.visible = true
