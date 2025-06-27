@@ -1,56 +1,19 @@
-[gd_scene load_steps=22 format=3 uid="uid://c4nnkyvx66n27"]
+[gd_scene load_steps=16 format=3 uid="uid://c4nnkyvx66n27"]
 
 [ext_resource type="Script" path="res://Scripts/npc.gd" id="1_83bud"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="2_2eo2t"]
 [ext_resource type="Texture2D" uid="uid://dyu4dlqxeo3q8" path="res://Sprites/npc-idle-rev01.png" id="3_w1lah"]
-[ext_resource type="Script" path="res://Scripts/outline.gd" id="4_uwkrm"]
 [ext_resource type="Texture2D" uid="uid://b8g12pgd1qfua" path="res://Sprites/npc-walk-rev01.png" id="5_tuwo0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1nn7e"]
+shader = ExtResource("2_2eo2t")
+shader_parameter/allow_out_of_bounds = true
+shader_parameter/outline_thickness = 1.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ho544"]
 radius = 4.0
-height = 16.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pkiit"]
-shader = ExtResource("2_2eo2t")
-shader_parameter/allow_out_of_bounds = true
-shader_parameter/outline_thickness = 2.0
-shader_parameter/outline_color = Color(1, 1, 1, 1)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pqx4b"]
-atlas = ExtResource("3_w1lah")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t4du3"]
-atlas = ExtResource("3_w1lah")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bydrk"]
-atlas = ExtResource("3_w1lah")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t73og"]
-atlas = ExtResource("3_w1lah")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ywt3o"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pqx4b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t4du3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bydrk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t73og")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 3.0
-}]
+height = 22.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d003k"]
 atlas = ExtResource("3_w1lah")
@@ -127,24 +90,14 @@ collision_mask = 41
 script = ExtResource("1_83bud")
 colors = [Color(1, 0.571308, 0.506958, 1), Color(1, 0.703593, 0.992505, 1), Color(0.498646, 0.664463, 1, 1), Color(1, 0.828514, 0.613115, 1), Color(1, 1, 1, 1)]
 interact_name = "Steal"
+outline = SubResource("ShaderMaterial_1nn7e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_ho544")
 
-[node name="Outline" type="AnimatedSprite2D" parent="."]
-visible = false
-show_behind_parent = true
-material = SubResource("ShaderMaterial_pkiit")
-position = Vector2(1, 1)
-rotation = 1.5708
-sprite_frames = SubResource("SpriteFrames_ywt3o")
-animation = &"Idle"
-frame_progress = 0.665191
-script = ExtResource("4_uwkrm")
-
 [node name="NPC" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, 1)
+position = Vector2(1, 0)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_ghoma")
 animation = &"idle"
