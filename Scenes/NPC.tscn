@@ -93,6 +93,12 @@ colors = [Color(1, 0.571308, 0.506958, 1), Color(1, 0.703593, 0.992505, 1), Colo
 interact_name = "Steal"
 outline = SubResource("ShaderMaterial_1nn7e")
 
+[node name="VisionCone2D" parent="." instance=ExtResource("5_b7lxq")]
+rotation = -1.5708
+angle_deg = 45
+ray_count = 20
+max_distance = 125.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_ho544")
@@ -103,9 +109,3 @@ rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_ghoma")
 animation = &"idle"
 frame_progress = 0.243916
-
-[node name="VisionCone2D" parent="." instance=ExtResource("5_b7lxq")]
-rotation = -1.5708
-angle_deg = 45
-ray_count = 20
-max_distance = 125.0

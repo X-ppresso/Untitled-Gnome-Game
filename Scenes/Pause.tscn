@@ -88,6 +88,7 @@ _data = {
 }
 
 [node name="Pause" type="CanvasLayer"]
+process_mode = 2
 script = ExtResource("1_dj38r")
 
 [node name="Panel" type="Panel" parent="."]
@@ -142,6 +143,7 @@ layout_mode = 2
 texture_normal = SubResource("PlaceholderTexture2D_r3cuy")
 
 [node name="Transition" type="AnimationPlayer" parent="."]
+process_mode = 2
 libraries = {
 "": SubResource("AnimationLibrary_rhbxn")
 }

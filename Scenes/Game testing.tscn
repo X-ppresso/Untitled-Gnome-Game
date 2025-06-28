@@ -375,6 +375,7 @@ position = Vector2(-17, -28)
 visible = false
 
 [node name="Pause" parent="." instance=ExtResource("7_12u7d")]
+process_mode = 2
 visible = false
 
 [node name="Transition" type="AnimationPlayer" parent="."]
