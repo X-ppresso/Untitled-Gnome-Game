@@ -143,7 +143,6 @@ layout_mode = 2
 texture_normal = SubResource("PlaceholderTexture2D_r3cuy")
 
 [node name="Transition" type="AnimationPlayer" parent="."]
-process_mode = 2
 libraries = {
 "": SubResource("AnimationLibrary_rhbxn")
 }
@@ -161,3 +160,4 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="VBoxContainer/Restart Level" to="." method="_on_restart_level_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back to Menu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="animation_finished" from="Transition" to="." method="_on_transition_animation_finished"]

@@ -23,6 +23,8 @@ func _on_transition_animation_finished(anim_name: StringName) -> void:
 	elif is_restarting == true :
 		get_tree().reload_current_scene()
 		is_restarting = false
+	else:
+		pass
 
 func game_over():
 	get_tree().paused = true
