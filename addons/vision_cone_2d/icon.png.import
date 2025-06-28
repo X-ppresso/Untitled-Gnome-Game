@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlm6l16pen88g"
-path="res://.godot/imported/Test dobi.png-2f436eda5852ea47c24fe89da69ea7ae.ctex"
+uid="uid://cptjb58b56ipm"
+path="res://.godot/imported/icon.png-0aa5bba4af5a332d87a18103ccdae1a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Test dobi.png"
-dest_files=["res://.godot/imported/Test dobi.png-2f436eda5852ea47c24fe89da69ea7ae.ctex"]
+source_file="res://addons/vision_cone_2d/icon.png"
+dest_files=["res://.godot/imported/icon.png-0aa5bba4af5a332d87a18103ccdae1a1.ctex"]
 
 [params]
 

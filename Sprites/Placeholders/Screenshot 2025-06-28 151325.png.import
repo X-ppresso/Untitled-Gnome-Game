@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccnhr6jvlwksr"
-path="res://.godot/imported/kei_walk.png-f4b6ff6732a3b619131c8ac290548e60.ctex"
+uid="uid://pnvfq1fwbij7"
+path="res://.godot/imported/Screenshot 2025-06-28 151325.png-e9fd29a926f7c4a9cf878281802dc928.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/kei_walk.png"
-dest_files=["res://.godot/imported/kei_walk.png-f4b6ff6732a3b619131c8ac290548e60.ctex"]
+source_file="res://Sprites/Placeholders/Screenshot 2025-06-28 151325.png"
+dest_files=["res://.godot/imported/Screenshot 2025-06-28 151325.png-e9fd29a926f7c4a9cf878281802dc928.ctex"]
 
 [params]
 

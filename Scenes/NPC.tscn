@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4nnkyvx66n27"]
+[gd_scene load_steps=17 format=3 uid="uid://c4nnkyvx66n27"]
 
 [ext_resource type="Script" path="res://Scripts/npc.gd" id="1_83bud"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="2_2eo2t"]
 [ext_resource type="Texture2D" uid="uid://dyu4dlqxeo3q8" path="res://Sprites/npc-idle-rev01.png" id="3_w1lah"]
+[ext_resource type="PackedScene" path="res://Scenes/vision_cone_2d_template.tscn" id="5_b7lxq"]
 [ext_resource type="Texture2D" uid="uid://b8g12pgd1qfua" path="res://Sprites/npc-walk-rev01.png" id="5_tuwo0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1nn7e"]
@@ -102,3 +103,9 @@ rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_ghoma")
 animation = &"idle"
 frame_progress = 0.243916
+
+[node name="VisionCone2D" parent="." instance=ExtResource("5_b7lxq")]
+rotation = -1.5708
+angle_deg = 45
+ray_count = 20
+max_distance = 125.0

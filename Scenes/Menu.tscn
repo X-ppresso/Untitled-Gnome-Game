@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwx7kawg3t8af"]
+[gd_scene load_steps=11 format=3 uid="uid://cwx7kawg3t8af"]
 
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_ntlvg"]
 [ext_resource type="Texture2D" uid="uid://catobeqal1lod" path="res://icon.svg" id="2_je344"]
@@ -14,6 +14,82 @@ size = Vector2(200, 50)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sh3kj"]
 size = Vector2(200, 50)
+
+[sub_resource type="Animation" id="Animation_ktq1x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_krsud"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_oy7d7"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhbxn"]
+_data = {
+"RESET": SubResource("Animation_ktq1x"),
+"fade_in": SubResource("Animation_krsud"),
+"fade_out": SubResource("Animation_oy7d7")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -35,10 +111,10 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_5fcmx")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 710.0
-offset_top = 349.0
-offset_right = 910.0
-offset_bottom = 507.0
+offset_left = 757.0
+offset_top = 379.0
+offset_right = 957.0
+offset_bottom = 537.0
 scale = Vector2(1.32001, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
@@ -58,5 +134,21 @@ texture_normal = SubResource("PlaceholderTexture2D_eih7e")
 layout_mode = 2
 texture_normal = SubResource("PlaceholderTexture2D_sh3kj")
 
+[node name="Transition" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rhbxn")
+}
+
+[node name="ColorRect" type="ColorRect" parent="Transition"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="animation_finished" from="Transition" to="." method="_on_transition_animation_finished"]

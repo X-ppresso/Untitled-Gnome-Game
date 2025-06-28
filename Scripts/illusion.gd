@@ -96,7 +96,7 @@ func start_distraction(duration: float):
 	color_rect_node.material = scan_shader_material
 
 func _on_life_timer_timeout() -> void:
-	print("Distraction dummy vanished!")
+	#print("Distraction dummy vanished!")
 	queue_free()
 
 func _on_body_entered(body: Node2D): # For actual dummy, NPC detection

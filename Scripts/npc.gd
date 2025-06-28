@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var default: ShaderMaterial
 var mouse_is_hovering = false
 
+
 @onready var color_rect_node = $NPC
 
 var interact: Callable = func():
