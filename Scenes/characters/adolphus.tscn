@@ -1,0 +1,114 @@
+[gd_scene load_steps=15 format=3 uid="uid://duv4o8qb5stoi"]
+
+[ext_resource type="Script" path="res://Scenes/characters/adolphus.gd" id="1_8yj2g"]
+[ext_resource type="Texture2D" uid="uid://df3qh0yb8ahov" path="res://Sprites/adolphus-idle.png" id="1_jjupd"]
+[ext_resource type="Texture2D" uid="uid://dstbtqimngvvr" path="res://Sprites/adolphus-walk.png" id="2_2q7ch"]
+[ext_resource type="PackedScene" uid="uid://btdccn8c5w6ui" path="res://Scenes/pathfinding.tscn" id="3_o8u6b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnk4e"]
+atlas = ExtResource("1_jjupd")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3t6p"]
+atlas = ExtResource("1_jjupd")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvt43"]
+atlas = ExtResource("1_jjupd")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vi0l"]
+atlas = ExtResource("1_jjupd")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3d1b"]
+atlas = ExtResource("2_2q7ch")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4i72a"]
+atlas = ExtResource("2_2q7ch")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqd8g"]
+atlas = ExtResource("2_2q7ch")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr0om"]
+atlas = ExtResource("2_2q7ch")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vuicj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnk4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3t6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvt43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vi0l")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3d1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4i72a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqd8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr0om")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3d1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4i72a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqd8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr0om")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d8eg3"]
+radius = 11.0
+height = 38.0
+
+[node name="Adolphus" type="CharacterBody2D" node_paths=PackedStringArray("path")]
+script = ExtResource("1_8yj2g")
+path = NodePath("pathfinding")
+speed = 70.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 1)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_vuicj")
+animation = &"idle"
+frame_progress = 0.343741
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -1)
+shape = SubResource("CapsuleShape2D_d8eg3")
+
+[node name="pathfinding" parent="." instance=ExtResource("3_o8u6b")]

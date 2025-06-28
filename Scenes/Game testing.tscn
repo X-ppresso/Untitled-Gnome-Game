@@ -1,13 +1,14 @@
-[gd_scene load_steps=15 format=4 uid="uid://cr6jwkjad8sgo"]
+[gd_scene load_steps=17 format=4 uid="uid://cr6jwkjad8sgo"]
 
-[ext_resource type="PackedScene" uid="uid://v6t73n2jf2xb" path="res://Scenes/Dobby.tscn" id="1_36c1k"]
+[ext_resource type="PackedScene" uid="uid://v6t73n2jf2xb" path="res://Scenes/characters/Dobby.tscn" id="1_36c1k"]
 [ext_resource type="Script" path="res://Scripts/game_testing.gd" id="1_x2utc"]
 [ext_resource type="Texture2D" uid="uid://wvk8laydvfvw" path="res://Shaders/2d_lights_and_shadows_neutral_po.jpg" id="2_hw3uu"]
 [ext_resource type="Texture2D" uid="uid://cro76n3qdjt7w" path="res://Tilemap/Tileset.png" id="2_ps0ox"]
-[ext_resource type="PackedScene" uid="uid://c4nnkyvx66n27" path="res://Scenes/NPC.tscn" id="3_pkual"]
-[ext_resource type="PackedScene" uid="uid://lqijwakbvmo5" path="res://Scenes/kei.tscn" id="5_duma5"]
+[ext_resource type="PackedScene" uid="uid://c4nnkyvx66n27" path="res://Scenes/characters/NPC.tscn" id="3_pkual"]
+[ext_resource type="PackedScene" uid="uid://lqijwakbvmo5" path="res://Scenes/characters/kei.tscn" id="5_duma5"]
 [ext_resource type="PackedScene" uid="uid://bwb1sm8j0jt65" path="res://Scenes/Game_Over.tscn" id="6_wsrfq"]
 [ext_resource type="PackedScene" uid="uid://sy1g16k2xhcp" path="res://Scenes/Pause.tscn" id="7_12u7d"]
+[ext_resource type="PackedScene" uid="uid://duv4o8qb5stoi" path="res://Scenes/characters/adolphus.tscn" id="9_7f2mb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sagmi"]
 texture = ExtResource("2_ps0ox")
@@ -336,6 +337,11 @@ _data = {
 "fade_out": SubResource("Animation_oy7d7")
 }
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1ymda"]
+vertices = PackedVector2Array(105.68, 60.1094, -70.7578, 61.8906, -68.2109, -49.3672, 91.2109, -55.6406)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-78, -59, -81, 72, 117, 70, 100, -66)])
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_x2utc")
 
@@ -358,12 +364,14 @@ z_index = -1
 tile_map_data = PackedByteArray("AAD/////AAABAAEAAAAAAP//AAABAAEAAAABAP//AAABAAEAAAABAAAAAAADAAAAAAAAAAAAAAABAAEAAAD//wAAAAABAAEAAAD+/wAAAAABAAEAAAD9/wAAAAABAAEAAAD9/wEAAAABAAEAAAD+/wEAAAABAAEAAAD//wEAAAABAAEAAAAAAAEAAAABAAEAAAABAAEAAAADAAEAAAACAAAAAAAEAAAAAAACAAEAAAAEAAEAAAD+////AAABAAEAAAD9////AAAEAAEAAAD8////AAADAAEAAAD8//7/AAADAAAAAAD9//7/AAAEAAAAAAD+//7/AAABAAEAAAD///7/AAABAAEAAAAAAP7/AAABAAEAAAABAP7/AAABAAEAAAACAP7/AAABAAEAAAADAP7/AAABAAEAAAADAP//AAABAAEAAAADAAAAAAABAAEAAAACAP//AAABAAEAAAADAAEAAAABAAEAAAACAAIAAAABAAEAAAABAAIAAAABAAEAAAAAAAIAAAABAAEAAAD//wIAAAABAAEAAAD+/wIAAAABAAEAAAD9/wIAAAABAAEAAAD8/wEAAAABAAEAAAD8/wAAAAABAAEAAAD8/wIAAAABAAEAAAADAAIAAAABAAEAAAD7//3/AAAAAAAAAAD8//3/AAABAAAAAAD9//3/AAABAAAAAAD+//3/AAABAAAAAAD///3/AAABAAAAAAAAAP3/AAABAAAAAAABAP3/AAABAAAAAAACAP3/AAABAAAAAAADAP3/AAABAAAAAAAEAP3/AAACAAAAAAAEAP7/AAACAAEAAAAEAP//AAACAAEAAAAEAAAAAAACAAEAAAAEAAEAAAACAAEAAAAEAAIAAAACAAEAAAAEAAMAAAACAAIAAAD8/wMAAAABAAIAAAD9/wMAAAABAAIAAAD+/wMAAAABAAIAAAD//wMAAAABAAIAAAAAAAMAAAABAAIAAAABAAMAAAABAAIAAAACAAMAAAABAAIAAAADAAMAAAABAAIAAAD7/wMAAAAAAAIAAAD7//7/AAAAAAEAAAD7////AAAAAAEAAAD7/wAAAAAAAAEAAAD7/wEAAAAAAAEAAAD7/wIAAAAAAAEAAAAFAP3/AAAIAAEAAAAFAP7/AAAIAAEAAAAGAP3/AAAIAAEAAAAGAP7/AAAIAAIAAAAFAP//AAAIAAEAAAAFAAAAAAAIAAEAAAAGAP//AAAIAAIAAAAGAAAAAAAIAAIAAAAFAAEAAAAFAAMAAAAFAAIAAAAFAAQAAAAGAAEAAAAIAAIAAAAGAAIAAAAGAAQAAAAHAP3/AAAIAAEAAAAHAP7/AAAIAAEAAAAIAP3/AAAIAAEAAAAIAP7/AAAIAAEAAAAHAP//AAAFAAMAAAAHAAAAAAAFAAQAAAAIAP//AAAIAAIAAAAIAAAAAAAIAAIAAAAHAAEAAAAIAAEAAAAHAAIAAAAIAAEAAAAIAAEAAAAIAAIAAAAIAAIAAAAIAAIAAAAFAAMAAAAAAAAAAAAGAAMAAAABAAAAAAAHAAMAAAABAAAAAAAIAAMAAAABAAAAAAAJAP3/AAACAAkAAAAJAP7/AAACAAkAAAAJAP//AAADAAkAAAAJAAAAAAACAAkAAAAJAAEAAAADAAkAAAAJAAIAAAACAAkAAAD4//7/AAAHAAIAAAD4////AAAHAAMAAAD4/wAAAAAHAAQAAAD5//7/AAAIAAIAAAD5////AAAIAAMAAAD5/wAAAAAIAAQAAAD6//7/AAAJAAIAAAD6////AAAJAAMAAAD6/wAAAAAJAAQAAAA=")
 tile_set = SubResource("TileSet_e00td")
 
+[node name="Marker2D" type="Marker2D" parent="." groups=["NormalNPC1"]]
+position = Vector2(-34, -65)
+
+[node name="Marker2D2" type="Marker2D" parent="." groups=["NormalNPC1"]]
+position = Vector2(35, -65)
+
 [node name="NPC 1" parent="." instance=ExtResource("3_pkual")]
 position = Vector2(77, -38)
-rotation = 1.71469
-
-[node name="NPC 2" parent="." instance=ExtResource("3_pkual")]
-position = Vector2(35, -39)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.205509, 0.325576, 0.55865, 1)
@@ -397,5 +405,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("9_7f2mb")]
+position = Vector2(-36, 30)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_1ymda")
 
 [connection signal="animation_finished" from="Transition" to="." method="_on_transition_animation_finished"]

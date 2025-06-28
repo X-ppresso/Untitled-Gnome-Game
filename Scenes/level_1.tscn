@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://cw0ba6dnrsgiu"]
 
 [ext_resource type="Texture2D" uid="uid://hr2ycnq6voo0" path="res://Tilemap/tiles-Sheet.png" id="1_ej2uv"]
-[ext_resource type="PackedScene" uid="uid://v6t73n2jf2xb" path="res://Scenes/Dobby.tscn" id="1_yw8pw"]
+[ext_resource type="PackedScene" uid="uid://v6t73n2jf2xb" path="res://Scenes/characters/Dobby.tscn" id="1_yw8pw"]
 [ext_resource type="Texture2D" uid="uid://wvk8laydvfvw" path="res://Shaders/2d_lights_and_shadows_neutral_po.jpg" id="2_7yd50"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_urnd6"]
