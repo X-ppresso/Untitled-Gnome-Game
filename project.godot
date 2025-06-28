@@ -21,6 +21,10 @@ window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/addons/yet_another_behavior_tree/plugin.cfg", "res://addons/vision_cone_2d/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
