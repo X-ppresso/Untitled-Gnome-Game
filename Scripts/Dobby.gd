@@ -111,6 +111,9 @@ func _input(event):
 		
 	if event.is_action_pressed("Confirm"):
 		pass
+		
+	if event.is_action_pressed("Pause"):
+		$"../Pause".pause()
 	
 	#if event.is_action_pressed("Ability_2") and not is_placing_distraction:
 		#start_disguise()
@@ -270,7 +273,7 @@ func exit_disguise_mode():
 	is_in_disguise = false
 	$Dobby_anim.visible = true
 	$disguise.visible = false
-	$"../Game_Over".game_over()
+	#$"../Game_Over".game_over()
 
 func _on_disguise_timer_timeout() -> void:
 	exit_disguise_mode()
