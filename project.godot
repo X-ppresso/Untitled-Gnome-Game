@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Untitled Gnome Game"
-run/main_scene="res://Scenes/Menu.tscn"
+run/main_scene="res://Scenes/ui/Menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+InteractionManager="*res://Scenes/System/interaction_manager.tscn"
 
 [display]
 

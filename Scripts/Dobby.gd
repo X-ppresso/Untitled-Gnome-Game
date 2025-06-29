@@ -9,7 +9,6 @@ extends CharacterBody2D
 # How quickly the character slows down. Higher values mean less sliding.
 @export var friction = 10
 
-@onready var interaction_area: Area2D = $Steal # Path to player's steal range
 @onready var mouse_ray_cast: RayCast2D = $MouseRayCast 
 
 var _interactable_npcs: Array[Node] = [] # Stores NPCs currently in range
@@ -84,9 +83,6 @@ func _ready():
 	
 	player_movement_component = self
 	
-	 # Connect signals from the InteractionArea
-	interaction_area.body_entered.connect(_on_interaction_area_body_entered)
-	interaction_area.body_exited.connect(_on_interaction_area_body_exited)
 	
 	 # Mouse RayCast2D setup
 	mouse_ray_cast.enabled = true # Keep it enabled always to detect hover

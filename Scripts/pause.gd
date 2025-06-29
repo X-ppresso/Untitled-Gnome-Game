@@ -1,9 +1,10 @@
 extends CanvasLayer
 
 @onready var transition = $Transition
-var menu = preload("res://Scenes/Menu.tscn")
+var menu = preload("res://Scenes/ui/Menu.tscn")
 var is_restarting = false
 var is_exiting = false
+var is_paused = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,11 +30,12 @@ func _on_transition_animation_finished(anim_name: StringName) -> void:
 		is_restarting = false
 		
 	elif is_exiting == true:
-		get_tree().change_scene_to_file("res://Scenes/Menu.tscn")
+		get_tree().change_scene_to_file("res://Scenes/ui/Menu.tscn")
 		is_exiting = false
 	else:
 		pass
 
 func pause():
+	is_paused = true
 	self.show()
 	get_tree().paused = true

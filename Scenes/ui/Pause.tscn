@@ -1,0 +1,179 @@
+[gd_scene load_steps=15 format=3 uid="uid://sy1g16k2xhcp"]
+
+[ext_resource type="Script" path="res://Scripts/pause.gd" id="1_dj38r"]
+[ext_resource type="Texture2D" uid="uid://boa0i6xx11v3f" path="res://Sprites/Buttons/continue-normal Sheet.png" id="2_c4aah"]
+[ext_resource type="Texture2D" uid="uid://bygssiynvvx0h" path="res://Sprites/Buttons/continue-click Sheet.png" id="3_0388b"]
+[ext_resource type="Texture2D" uid="uid://iprndw7v8jp5" path="res://Sprites/Buttons/continue-hover Sheet.png" id="4_26epn"]
+[ext_resource type="Texture2D" uid="uid://5eoptfmqm4n3" path="res://Sprites/Buttons/restart-normal Sheet.png" id="5_lq3sv"]
+[ext_resource type="Texture2D" uid="uid://copt4suf53jdf" path="res://Sprites/Buttons/restart-click Sheet.png" id="6_7y3no"]
+[ext_resource type="Texture2D" uid="uid://b4e38k5uo10ku" path="res://Sprites/Buttons/restart-hover Sheet.png" id="7_w6y0n"]
+[ext_resource type="Texture2D" uid="uid://dxs3f5l4gvwjp" path="res://Sprites/Buttons/exit level-normal Sheet.png" id="8_0hs80"]
+[ext_resource type="Texture2D" uid="uid://gmut13hn3x6n" path="res://Sprites/Buttons/exit level-click Sheet.png" id="9_8e3ph"]
+[ext_resource type="Texture2D" uid="uid://c1pr4v84uu62o" path="res://Sprites/Buttons/exit level-hover Sheet.png" id="10_s6gse"]
+
+[sub_resource type="Animation" id="Animation_ktq1x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_krsud"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_oy7d7"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhbxn"]
+_data = {
+"RESET": SubResource("Animation_ktq1x"),
+"fade_in": SubResource("Animation_krsud"),
+"fade_out": SubResource("Animation_oy7d7")
+}
+
+[node name="Pause" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_dj38r")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -239.0
+offset_top = 116.0
+offset_right = 266.0
+offset_bottom = 213.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 71
+text = "Pausesussy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -40.0
+offset_right = 277.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Continue" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(384, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("2_c4aah")
+texture_pressed = ExtResource("3_0388b")
+texture_hover = ExtResource("4_26epn")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Restart Level" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(384, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("5_lq3sv")
+texture_pressed = ExtResource("6_7y3no")
+texture_hover = ExtResource("7_w6y0n")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Back to Menu" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(384, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("8_0hs80")
+texture_pressed = ExtResource("9_8e3ph")
+texture_hover = ExtResource("10_s6gse")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Transition" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rhbxn")
+}
+
+[node name="ColorRect" type="ColorRect" parent="Transition"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="VBoxContainer/Restart Level" to="." method="_on_restart_level_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back to Menu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="animation_finished" from="Transition" to="." method="_on_transition_animation_finished"]

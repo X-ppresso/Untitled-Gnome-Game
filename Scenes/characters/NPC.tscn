@@ -1,11 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4nnkyvx66n27"]
+[gd_scene load_steps=19 format=3 uid="uid://c4nnkyvx66n27"]
 
 [ext_resource type="Script" path="res://Scripts/npc.gd" id="1_83bud"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="2_2eo2t"]
-[ext_resource type="PackedScene" uid="uid://c6eiuhkeg0vy4" path="res://Scenes/wander.tscn" id="3_p3pdr"]
 [ext_resource type="Texture2D" uid="uid://dyu4dlqxeo3q8" path="res://Sprites/npc-idle-rev01.png" id="3_w1lah"]
 [ext_resource type="PackedScene" path="res://Scenes/vision_cone_2d_template.tscn" id="5_b7lxq"]
 [ext_resource type="Texture2D" uid="uid://b8g12pgd1qfua" path="res://Sprites/npc-walk-rev01.png" id="5_tuwo0"]
+[ext_resource type="PackedScene" uid="uid://c4voibe7cwodo" path="res://Scenes/System/interaction_area.tscn" id="7_wwjcr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1nn7e"]
 shader = ExtResource("2_2eo2t")
@@ -86,18 +86,18 @@ animations = [{
 "speed": 3.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("wander_direction")]
-collision_layer = 9
-collision_mask = 41
+[sub_resource type="CircleShape2D" id="CircleShape2D_0eji4"]
+radius = 16.0
+
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("wander_direction")]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_83bud")
-wander_direction = NodePath("Wander")
+wander_direction = NodePath("")
 colors = [Color(1, 0.571308, 0.506958, 1), Color(1, 0.703593, 0.992505, 1), Color(0.498646, 0.664463, 1, 1), Color(1, 0.828514, 0.613115, 1), Color(1, 1, 1, 1)]
 interact_name = "Steal"
 outline = SubResource("ShaderMaterial_1nn7e")
 walk_speed = 40.0
-
-[node name="Wander" parent="." instance=ExtResource("3_p3pdr")]
-group_name = "NormalNPC1"
 
 [node name="VisionCone2D" parent="." instance=ExtResource("5_b7lxq")]
 rotation = -1.5708
@@ -115,3 +115,11 @@ rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_ghoma")
 animation = &"idle"
 frame_progress = 0.243916
+
+[node name="InteractionArea2" parent="." instance=ExtResource("7_wwjcr")]
+z_index = 20
+interaction_name = "Steal (Left Click)"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2"]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_0eji4")

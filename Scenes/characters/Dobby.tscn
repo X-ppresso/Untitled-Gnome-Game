@@ -1,7 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://v6t73n2jf2xb"]
+[gd_scene load_steps=44 format=3 uid="uid://v6t73n2jf2xb"]
 
 [ext_resource type="Script" path="res://Scripts/Dobby.gd" id="1_7y735"]
-[ext_resource type="PackedScene" uid="uid://pylcx5rd8k7o" path="res://Scenes/illusion.tscn" id="2_1nwm4"]
+[ext_resource type="PackedScene" uid="uid://pylcx5rd8k7o" path="res://Scenes/System/illusion.tscn" id="2_1nwm4"]
 [ext_resource type="PackedScene" uid="uid://b3r8vnwofy55d" path="res://Scenes/placement_camera.tscn" id="3_mn8jy"]
 [ext_resource type="Texture2D" uid="uid://bjqls2y0nynwk" path="res://Sprites/dobby-ability.png" id="4_h1dli"]
 [ext_resource type="Texture2D" uid="uid://buqjq3j3cbeu5" path="res://Sprites/dobby 16x16_run_sheet_final.png" id="4_kxc0c"]
@@ -289,10 +289,7 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4nybe"]
-radius = 15.0
-
-[node name="Dobby" type="CharacterBody2D"]
+[node name="Dobby" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(2, 0)
 collision_mask = 11
 script = ExtResource("1_7y735")
@@ -328,18 +325,9 @@ wait_time = 20.0
 wait_time = 3.0
 one_shot = true
 
-[node name="Steal" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Steal"]
-shape = SubResource("CircleShape2D_4nybe")
-
 [node name="MouseRayCast" type="RayCast2D" parent="."]
 collision_mask = 8
 
 [connection signal="timeout" from="Illusion cooldown" to="." method="_on_illusion_cooldown_timeout"]
 [connection signal="timeout" from="Disguise cooldown" to="." method="_on_disguise_cooldown_timeout"]
 [connection signal="timeout" from="Disguise timer" to="." method="_on_disguise_timer_timeout"]
-[connection signal="body_entered" from="Steal" to="." method="_on_steal_body_entered"]
-[connection signal="body_exited" from="Steal" to="." method="_on_steal_body_exited"]

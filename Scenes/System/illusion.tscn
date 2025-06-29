@@ -1,0 +1,118 @@
+[gd_scene load_steps=20 format=3 uid="uid://pylcx5rd8k7o"]
+
+[ext_resource type="Script" path="res://Scripts/illusion.gd" id="1_26g7o"]
+[ext_resource type="Shader" uid="uid://de1mxawcbvo43" path="res://Shaders/Scanline.tres" id="2_l40fl"]
+[ext_resource type="Shader" path="res://Shaders/illusion.gdshader" id="3_rs7oc"]
+[ext_resource type="Texture2D" uid="uid://bjqls2y0nynwk" path="res://Sprites/dobby-ability.png" id="4_v7vex"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shoga"]
+shader = ExtResource("2_l40fl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8a6eg"]
+shader = ExtResource("3_rs7oc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5eitf"]
+shader = ExtResource("2_l40fl")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4spwj"]
+atlas = ExtResource("4_v7vex")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htbop"]
+atlas = ExtResource("4_v7vex")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvgh1"]
+atlas = ExtResource("4_v7vex")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5vw4"]
+atlas = ExtResource("4_v7vex")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7udrj"]
+atlas = ExtResource("4_v7vex")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep6q6"]
+atlas = ExtResource("4_v7vex")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vvyq"]
+atlas = ExtResource("4_v7vex")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjrjc"]
+atlas = ExtResource("4_v7vex")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8s60"]
+atlas = ExtResource("4_v7vex")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hw1x"]
+atlas = ExtResource("4_v7vex")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s5a5l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4spwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htbop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvgh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5vw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7udrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep6q6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vvyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjrjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8s60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hw1x")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2hjv"]
+radius = 5.0
+
+[node name="Illusion" type="Area2D"]
+collision_layer = 16
+collision_mask = 10
+script = ExtResource("1_26g7o")
+scan_shader_material = SubResource("ShaderMaterial_shoga")
+preview_shader_material = SubResource("ShaderMaterial_8a6eg")
+
+[node name="Illusion_idle" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_5eitf")
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_s5a5l")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g2hjv")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
