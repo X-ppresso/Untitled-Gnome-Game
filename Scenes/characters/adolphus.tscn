@@ -96,9 +96,10 @@ radius = 11.0
 height = 38.0
 
 [node name="Adolphus" type="CharacterBody2D" node_paths=PackedStringArray("path")]
+collision_mask = 2
 script = ExtResource("1_8yj2g")
 path = NodePath("pathfinding")
-speed = 70.0
+speed = 150.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 1)

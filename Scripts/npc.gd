@@ -27,4 +27,5 @@ func toggle_outline():
 func _physics_process(delta: float) -> void:
 	velocity = wander_direction.direction * walk_speed
 	
+	
 	move_and_slide()
