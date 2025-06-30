@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://sy1g16k2xhcp"]
+[gd_scene load_steps=16 format=3 uid="uid://sy1g16k2xhcp"]
 
 [ext_resource type="Script" path="res://Scripts/pause.gd" id="1_dj38r"]
+[ext_resource type="FontFile" uid="uid://m2ue0rvjh2jl" path="res://Fonts/ThaleahFat.ttf" id="2_3746g"]
 [ext_resource type="Texture2D" uid="uid://boa0i6xx11v3f" path="res://Sprites/Buttons/continue-normal Sheet.png" id="2_c4aah"]
 [ext_resource type="Texture2D" uid="uid://bygssiynvvx0h" path="res://Sprites/Buttons/continue-click Sheet.png" id="3_0388b"]
 [ext_resource type="Texture2D" uid="uid://iprndw7v8jp5" path="res://Sprites/Buttons/continue-hover Sheet.png" id="4_26epn"]
@@ -102,13 +103,14 @@ grow_vertical = 2
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -239.0
-offset_top = 116.0
-offset_right = 266.0
-offset_bottom = 213.0
+offset_left = -238.0
+offset_top = 133.0
+offset_right = 267.0
+offset_bottom = 230.0
 grow_horizontal = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 71
+theme_override_fonts/font = ExtResource("2_3746g")
+theme_override_font_sizes/font_size = 100
 text = "Pausesussy"
 horizontal_alignment = 1
 vertical_alignment = 1

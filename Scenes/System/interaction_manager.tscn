@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/interaction_manager.gd" id="1_58xhr"]
 
 [node name="InteractionManager" type="Node2D"]
+visible = false
 script = ExtResource("1_58xhr")
 
 [node name="Label" type="Label" parent="."]

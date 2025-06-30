@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwb1sm8j0jt65"]
+[gd_scene load_steps=13 format=3 uid="uid://bwb1sm8j0jt65"]
 
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_12jxm"]
 [ext_resource type="FontFile" uid="uid://m2ue0rvjh2jl" path="res://Fonts/ThaleahFat.ttf" id="2_oicef"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o2quq"]
-size = Vector2(326, 85)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mnxov"]
-size = Vector2(300, 100)
+[ext_resource type="Texture2D" uid="uid://5eoptfmqm4n3" path="res://Sprites/Buttons/restart-normal Sheet.png" id="3_6o85n"]
+[ext_resource type="Texture2D" uid="uid://copt4suf53jdf" path="res://Sprites/Buttons/restart-click Sheet.png" id="4_2bjup"]
+[ext_resource type="Texture2D" uid="uid://b4e38k5uo10ku" path="res://Sprites/Buttons/restart-hover Sheet.png" id="5_yox6y"]
+[ext_resource type="Texture2D" uid="uid://dxs3f5l4gvwjp" path="res://Sprites/Buttons/exit level-normal Sheet.png" id="6_kxqmi"]
+[ext_resource type="Texture2D" uid="uid://gmut13hn3x6n" path="res://Sprites/Buttons/exit level-click Sheet.png" id="7_mwsut"]
+[ext_resource type="Texture2D" uid="uid://c1pr4v84uu62o" path="res://Sprites/Buttons/exit level-hover Sheet.png" id="8_by3o2"]
 
 [sub_resource type="Animation" id="Animation_ktq1x"]
 length = 0.001
@@ -106,20 +106,41 @@ theme_override_fonts/font = ExtResource("2_oicef")
 theme_override_font_sizes/font_size = 72
 text = "RIP skill issue"
 
-[node name="Exit" type="TextureButton" parent="."]
-process_mode = 2
-offset_left = 414.0
-offset_top = 447.0
-offset_right = 740.0
-offset_bottom = 547.0
-texture_normal = SubResource("PlaceholderTexture2D_o2quq")
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -32.0
+offset_right = 269.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
-[node name="Retry" type="TextureButton" parent="."]
-offset_left = 417.0
-offset_top = 303.0
-offset_right = 743.0
-offset_bottom = 403.0
-texture_normal = SubResource("PlaceholderTexture2D_mnxov")
+[node name="Retry" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(384, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("3_6o85n")
+texture_pressed = ExtResource("4_2bjup")
+texture_hover = ExtResource("5_yox6y")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Exit" type="TextureButton" parent="VBoxContainer"]
+process_mode = 2
+custom_minimum_size = Vector2(384, 48)
+layout_mode = 2
+texture_normal = ExtResource("6_kxqmi")
+texture_pressed = ExtResource("7_mwsut")
+texture_hover = ExtResource("8_by3o2")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Transition" type="AnimationPlayer" parent="."]
 libraries = {
@@ -136,6 +157,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="animation_finished" from="Transition" to="." method="_on_transition_animation_finished"]

@@ -15,5 +15,5 @@ func _on_play_pressed() -> void:
 
 func _on_transition_animation_finished(anim_name: StringName) -> void:
 	if is_playing == true:
-		get_tree().change_scene_to_file("res://Scenes/Game testing.tscn")
+		get_tree().change_scene_to_file("res://Scenes/level_1.tscn")
 		is_playing = false

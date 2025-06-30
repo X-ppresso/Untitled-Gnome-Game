@@ -1,23 +1,23 @@
-[gd_scene load_steps=13 format=3 uid="uid://cwx7kawg3t8af"]
+[gd_scene load_steps=19 format=3 uid="uid://cwx7kawg3t8af"]
 
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_ntlvg"]
 [ext_resource type="Texture2D" uid="uid://5setbk42fln5" path="res://Sprites/Placeholders/LAYOUT1.jpg" id="2_0lrhd"]
-[ext_resource type="Texture2D" uid="uid://pnvfq1fwbij7" path="res://Sprites/Placeholders/Screenshot 2025-06-28 151325.png" id="3_40ryt"]
+[ext_resource type="Texture2D" uid="uid://bpmcu0j0mhob3" path="res://Sprites/Logo.PNG" id="3_1hsni"]
+[ext_resource type="Texture2D" uid="uid://cui6qjcuqss4n" path="res://Sprites/Buttons/play-normal Sheet.png" id="4_jfwxa"]
+[ext_resource type="Texture2D" uid="uid://cw05jc5peduu" path="res://Sprites/Buttons/play-click Sheet.png" id="5_82g2q"]
+[ext_resource type="Texture2D" uid="uid://bdtx33mrd74k4" path="res://Sprites/Buttons/play-hover Sheet.png" id="6_vffa7"]
+[ext_resource type="Texture2D" uid="uid://rtdbv7nsru1h" path="res://Sprites/Buttons/credits-normal Sheet.png" id="7_3jjkf"]
+[ext_resource type="Texture2D" uid="uid://cm7qevxx7hxbe" path="res://Sprites/Buttons/credits-click Sheet.png" id="8_l324d"]
+[ext_resource type="Texture2D" uid="uid://dphdxs4mq8knn" path="res://Sprites/Buttons/credits-hover Sheet.png" id="9_1fd3s"]
+[ext_resource type="Texture2D" uid="uid://cqqe6km8n28fr" path="res://Sprites/Buttons/exit-normal Sheet.png" id="10_37cdh"]
+[ext_resource type="Texture2D" uid="uid://drmiq0lo3kkpr" path="res://Sprites/Buttons/exit-click Sheet.png" id="11_exra0"]
+[ext_resource type="Texture2D" uid="uid://byt304tp16vgu" path="res://Sprites/Buttons/exit-hover Sheet.png" id="12_powos"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5fcmx"]
 texture = ExtResource("2_0lrhd")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1vtyf"]
-texture = ExtResource("3_40ryt")
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dsaif"]
-size = Vector2(200, 50)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_eih7e"]
-size = Vector2(200, 50)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sh3kj"]
-size = Vector2(200, 50)
+texture = ExtResource("3_1hsni")
 
 [sub_resource type="Animation" id="Animation_ktq1x"]
 length = 0.001
@@ -115,18 +115,18 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_5fcmx")
 
 [node name="Panel2" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 614.0
-offset_top = 48.0
-offset_right = 1089.0
-offset_bottom = 340.0
+offset_left = 555.0
+offset_top = 7.0
+offset_right = 1144.0
+offset_bottom = 369.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_1vtyf")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 725.0
-offset_top = 367.0
-offset_right = 925.0
-offset_bottom = 525.0
+offset_left = 597.0
+offset_top = 361.0
+offset_right = 981.0
+offset_bottom = 519.0
 scale = Vector2(1.32001, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
@@ -135,16 +135,30 @@ size_flags_vertical = 0
 alignment = 1
 
 [node name="Play" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(384, 48)
 layout_mode = 2
-texture_normal = SubResource("PlaceholderTexture2D_dsaif")
+texture_normal = ExtResource("4_jfwxa")
+texture_pressed = ExtResource("5_82g2q")
+texture_hover = ExtResource("6_vffa7")
+stretch_mode = 4
 
 [node name="Settings" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(384, 48)
 layout_mode = 2
-texture_normal = SubResource("PlaceholderTexture2D_eih7e")
+texture_normal = ExtResource("7_3jjkf")
+texture_pressed = ExtResource("8_l324d")
+texture_hover = ExtResource("9_1fd3s")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Exit" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(384, 48)
 layout_mode = 2
-texture_normal = SubResource("PlaceholderTexture2D_sh3kj")
+texture_normal = ExtResource("10_37cdh")
+texture_pressed = ExtResource("11_exra0")
+texture_hover = ExtResource("12_powos")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Transition" type="AnimationPlayer" parent="."]
 libraries = {

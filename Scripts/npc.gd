@@ -2,13 +2,18 @@ extends CharacterBody2D
 
 @onready var interaction_area : InteractionArea = $InteractionArea2
 
-@export var wander_direction : Node2D
+@export_group("Movement")
+@export var move_on_path: PathFollow2D
+@export var movement_speed = 0.1
+
+@export_group("Visuals")
 @export var colors = [Color()]
 @export var interact_name: String = ""
 @export var is_interactable = true
 @export var outline: ShaderMaterial
 @export var default: ShaderMaterial
 
+var is_highlighted = false
 var mouse_is_hovering = false
 
 @export var walk_speed: float 
@@ -24,14 +29,22 @@ func _ready() -> void:
 	$NPC.play("idle")
 	interaction_area.interact = Callable(self, "_on_interact")
 
-func toggle_outline():
-	color_rect_node.material = outline
-	
+func _toggle_outline():
+	if is_highlighted :
+		color_rect_node.material = default
+		is_highlighted = false
+	elif not is_highlighted and InteractionManager.can_interact :
+		color_rect_node.material = outline
+		is_highlighted = true
+	else:
+		pass
 
 func _physics_process(delta: float) -> void:
-	velocity = wander_direction.direction * walk_speed
+	move_on_path.progress += movement_speed
+	global_position = move_on_path.position
+	rotation = move_on_path.rotation
 	
 	move_and_slide()
 
 func _on_interact():
-	pass
+	print("stolen")

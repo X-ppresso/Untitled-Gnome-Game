@@ -31,6 +31,7 @@ func _get_next_position():
 		_get_positions()
 	current_position = temp_positions.pop_front()
 	direction = to_local(current_position.position).normalized()
+	
 	if temp_positions.is_empty():
 		direction = idle_pos
 		idle = true
