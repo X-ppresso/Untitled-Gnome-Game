@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://kf8tqdlm8c5t"]
+[gd_scene load_steps=3 format=3 uid="uid://6tb0uvrq0dr1"]
 
 [ext_resource type="Script" path="res://addons/vision_cone_2d/vision_cone_2d.gd" id="1_eakwj"]
 [ext_resource type="Script" path="res://addons/vision_cone_2d/cone_editor_helper.gd" id="2_opycg"]

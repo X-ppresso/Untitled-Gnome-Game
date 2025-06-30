@@ -11,13 +11,13 @@ extends CharacterBody2D
 @export_group("Movement")
 @export var move_on_path: PathFollow2D
 @export var movement_speed = 0.1
-@onready var pos_start = position.x
 
+@onready var pos_start = position.x
 @onready var original_color = vision_renderer.color if vision_renderer else Color.WHITE
 @onready var rot_start = rotation
 
 func _on_vision_cone_area_body_entered(body: Node2D) -> void:
-	# print("%s is seeing %s" % [self, body])
+	print("%s is seeing %s" % [self, body])
 	vision_renderer.color = alert_color
 
 func _on_vision_cone_area_body_exited(body: Node2D) -> void:

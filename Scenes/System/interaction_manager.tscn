@@ -1,21 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://f06honq4xvct"]
+[gd_scene load_steps=5 format=3 uid="uid://f06honq4xvct"]
 
 [ext_resource type="FontFile" uid="uid://m2ue0rvjh2jl" path="res://Fonts/ThaleahFat.ttf" id="1_6e8p3"]
 [ext_resource type="Script" path="res://Scripts/interaction_manager.gd" id="1_58xhr"]
+[ext_resource type="Shader" path="res://Shaders/illusion.gdshader" id="2_qpqov"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uelit"]
+shader = ExtResource("2_qpqov")
 
 [node name="InteractionManager" type="Node2D"]
-visible = false
 script = ExtResource("1_58xhr")
 
 [node name="Label" type="Label" parent="."]
 z_index = 20
+material = SubResource("ShaderMaterial_uelit")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -62.0
-offset_right = 63.0
+offset_left = -62.5
+offset_right = 62.5
 offset_bottom = 15.0
 grow_horizontal = 2
+scale = Vector2(0.75, 0.75)
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_6e8p3")
 text = "Steal (Left Click)"
 horizontal_alignment = 1

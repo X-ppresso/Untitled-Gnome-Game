@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cr6jwkjad8sgo"]
+[gd_scene load_steps=17 format=4 uid="uid://cr6jwkjad8sgo"]
 
 [ext_resource type="PackedScene" uid="uid://v6t73n2jf2xb" path="res://Scenes/characters/Dobby.tscn" id="1_36c1k"]
 [ext_resource type="Script" path="res://Scripts/levelfade.gd" id="1_x2utc"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cro76n3qdjt7w" path="res://Tilemap/Tileset.png" id="2_ps0ox"]
 [ext_resource type="PackedScene" uid="uid://c4nnkyvx66n27" path="res://Scenes/characters/NPC.tscn" id="3_pkual"]
 [ext_resource type="PackedScene" uid="uid://lqijwakbvmo5" path="res://Scenes/characters/kei.tscn" id="5_duma5"]
-[ext_resource type="PackedScene" uid="uid://c6eiuhkeg0vy4" path="res://Scenes/System/wander.tscn" id="6_5jw1n"]
 [ext_resource type="PackedScene" uid="uid://bwb1sm8j0jt65" path="res://Scenes/ui/Game_Over.tscn" id="6_wsrfq"]
 [ext_resource type="PackedScene" uid="uid://sy1g16k2xhcp" path="res://Scenes/ui/Pause.tscn" id="7_12u7d"]
 [ext_resource type="PackedScene" uid="uid://duv4o8qb5stoi" path="res://Scenes/characters/adolphus.tscn" id="9_7f2mb"]
@@ -368,9 +367,6 @@ tile_set = SubResource("TileSet_e00td")
 [node name="NPC 1" parent="." instance=ExtResource("3_pkual")]
 position = Vector2(77, -38)
 
-[node name="Wander" parent="NPC 1" instance=ExtResource("6_5jw1n")]
-group_name = "NormalNPC1"
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.205509, 0.325576, 0.55865, 1)
 
@@ -410,8 +406,5 @@ position = Vector2(-36, 30)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_1ymda")
-
-[node name="Marker2D" type="Marker2D" parent="." groups=["NormalNPC1"]]
-position = Vector2(43, -66)
 
 [connection signal="animation_finished" from="Transition" to="." method="_on_transition_animation_finished"]

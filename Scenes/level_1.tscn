@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cw0ba6dnrsgiu"]
+[gd_scene load_steps=20 format=4 uid="uid://cw0ba6dnrsgiu"]
 
 [ext_resource type="Script" path="res://Scripts/levelfade.gd" id="1_d4nn4"]
 [ext_resource type="Texture2D" uid="uid://hr2ycnq6voo0" path="res://Tilemap/tiles-Sheet.png" id="1_ej2uv"]
@@ -279,6 +279,12 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_mw5lg")
 
+[sub_resource type="Curve2D" id="Curve2D_78idd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 155, 89, 0, 0, 0, 0, 270, 87, 0, 0, 0, 0, 208, 88, 0, 0, 0, 0, 208, 126, 0, 0, 0, 0, 155, 126, 0, 0, 0, 0, 155, 89)
+}
+point_count = 6
+
 [sub_resource type="Curve2D" id="Curve2D_6wgft"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 157, 494, 0, 0, 0, 0, 157, 494, 0, 0, 0, 0, 296, 494, 0, 0, 0, 0, 296, 517, 0, 0, 0, 0, 156, 517, 0, 0, 0, 0, 157, 494)
@@ -373,6 +379,13 @@ tile_set = SubResource("TileSet_pe24w")
 tile_map_data = PackedByteArray("AAALABAAAAAAAAEAAAARABAAAAAMAAEAAAAWAA8AAAAAAAEAAGALABkAAAAAAAEAADAPABkAAAAGAAEAADATABkAAAAAAAEAADAoABQAAAAAAAEAAAAoABcAAAAAAAEAAAAUAAcAAAAAAAEAAGAaAAcAAAAAAAEAAGAXAAYAAAAGAAEAAAAMAAoAAAAMAAEAAAAQAAoAAAASAAEAAAAPAAcAAAASAAEAAFAKABIAAAAkAAQAAAATAA4AAAAnAAAAAAAPABIAAAAoAAQAADAYABEAAAAoAAQAAFAYAA0AAAAkAAQAAGAXAAgAAAAoAAQAADAoABoAAAAGAAEAAGAnAB4AAAAMAAEAAGAqAB4AAAAMAAEAAGAoABEAAAAGAAEAAGApAA4AAAAMAAEAAAAdAAYAAAAeAAEAAAAhAAYAAAAYAAEAAAAiAAkAAAAhAAEAAFAiAAsAAAAeAAEAAFAnAA4AAAASAAEAAAAjAA4AAAAMAAEAAAAiAB4AAAAAAAEAAAAiACAAAAAAAAEAAAAeACAAAAAGAAEAAAAeAB4AAAAGAAEAAAATABsAAAAAAAEAAAALABsAAAAAAAEAAAAPABsAAAAGAAEAAAASABcAAAAkAAQAADAUABcAAAAoAAQAAAAVABcAAAAoAAQAAAALAAwAAAAoAAQAADAMAAwAAAAoAAQAADATABwAAAASAAEAADAKABwAAAASAAEAADAMABwAAAASAAEAADANACIAAAASAAEAAFALACQAAAAAAAEAAAAQACQAAAAAAAEAAAAWACQAAAAYAAEAAAAaACQAAAAeAAEAAAAdACMAAAASAAEAAFAdACcAAAAMAAEAAFAIAB4AAAAnAAAAAFAIAB8AAAAnAAAAAFAIACAAAAAnAAAAAFAIACEAAAAnAAAAAFAIACIAAAAnAAAAAFAIAB0AAAAnAAAAAFAIABwAAAAnAAAAAFAIABsAAAAnAAAAAFAIABoAAAAnAAAAAFAIABgAAAAnAAAAAFAIABkAAAAnAAAAAFAIABYAAAAnAAAAAFAIABcAAAAnAAAAAFAIABUAAAAnAAAAAFAIABQAAAAnAAAAAFAIABMAAAAnAAAAAFAIABIAAAAnAAAAAFAIABAAAAAnAAAAAFAIABEAAAAnAAAAAFAIAA8AAAAnAAAAAFAIAA4AAAAnAAAAAFAIAA0AAAAnAAAAAFAIAAwAAAAnAAAAAFAIAAsAAAAnAAAAAFAIAAoAAAAnAAAAAFAIAAkAAAAnAAAAAFAIAAgAAAAnAAAAAFAIAAcAAAAnAAAAAFAIAAYAAAAnAAAAAFAIAAUAAAAnAAAAAFAIAAQAAAAnAAAAAFAJAAQAAAAnAAAAAAAKAAQAAAAnAAAAAAALAAQAAAAnAAAAAAAMAAQAAAAnAAAAAAANAAQAAAAnAAAAAAAOAAQAAAAnAAAAAAAPAAQAAAAnAAAAAAAQAAQAAAAnAAAAAAARAAQAAAAnAAAAAAASAAQAAAAnAAAAAAA=")
 tile_set = SubResource("TileSet_56l0y")
 
+[node name="Path2D2" type="Path2D" parent="."]
+curve = SubResource("Curve2D_78idd")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D2"]
+position = Vector2(155, 89)
+rotation = -0.0173896
+
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_6wgft")
 
@@ -380,7 +393,7 @@ curve = SubResource("Curve2D_6wgft")
 position = Vector2(156.902, 494)
 
 [node name="Dobby" parent="." instance=ExtResource("1_yw8pw")]
-position = Vector2(188, 333)
+position = Vector2(221, 214)
 
 [node name="Dobbycam" type="Camera2D" parent="Dobby"]
 position = Vector2(5, 0)
@@ -395,9 +408,14 @@ energy = 0.3
 texture = ExtResource("2_7yd50")
 
 [node name="NPC" parent="." node_paths=PackedStringArray("move_on_path") instance=ExtResource("6_pynis")]
-position = Vector2(188, 510)
+position = Vector2(171, 335)
 move_on_path = NodePath("../Path2D/PathFollow2D")
 movement_speed = 0.4
+
+[node name="NPC2" parent="." node_paths=PackedStringArray("move_on_path") instance=ExtResource("6_pynis")]
+position = Vector2(154, 90)
+move_on_path = NodePath("../Path2D2/PathFollow2D")
+movement_speed = 0.5
 
 [node name="Game_Over" parent="." instance=ExtResource("5_8uaay")]
 visible = false

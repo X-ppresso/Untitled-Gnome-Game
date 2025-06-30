@@ -21,8 +21,8 @@ func _process(delta: float) -> void:
 		active_areas.sort_custom(_sort_by_distance_to_player)
 		label.text = base_text + active_areas[0].interaction_name
 		label.global_position = active_areas[0].global_position
-		label.global_position.y -= 36
-		label.global_position.x -= label.size.x / 2
+		label.global_position.y -= 24
+		label.global_position.x -= label.size.x / 2.5
 		label.show()
 	else:
 		label.hide()

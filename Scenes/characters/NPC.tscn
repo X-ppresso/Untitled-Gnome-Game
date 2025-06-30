@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/npc.gd" id="1_83bud"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="2_2eo2t"]
 [ext_resource type="Texture2D" uid="uid://dyu4dlqxeo3q8" path="res://Sprites/npc-idle-rev01.png" id="3_w1lah"]
-[ext_resource type="PackedScene" path="res://Scenes/vision_cone_2d_template.tscn" id="5_b7lxq"]
+[ext_resource type="PackedScene" uid="uid://6tb0uvrq0dr1" path="res://Scenes/vision_cone_2d_template.tscn" id="5_b7lxq"]
 [ext_resource type="Texture2D" uid="uid://b8g12pgd1qfua" path="res://Sprites/npc-walk-rev01.png" id="5_tuwo0"]
 [ext_resource type="PackedScene" uid="uid://c4voibe7cwodo" path="res://Scenes/System/interaction_area.tscn" id="7_wwjcr"]
 
@@ -89,24 +89,28 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_0eji4"]
 radius = 16.0
 
-[node name="NPC" type="CharacterBody2D"]
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("vision_renderer")]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_83bud")
+vision_renderer = NodePath("VisionCone2D/VisionConeRenderer2")
+alert_color = Color(0.936, 0, 0.177, 0.476)
 colors = [Color(1, 0.571308, 0.506958, 1), Color(1, 0.703593, 0.992505, 1), Color(0.498646, 0.664463, 1, 1), Color(1, 0.828514, 0.613115, 1), Color(1, 1, 1, 1)]
 interact_name = "Steal"
 outline = SubResource("ShaderMaterial_1nn7e")
 walk_speed = 40.0
 
-[node name="VisionCone2D" parent="." instance=ExtResource("5_b7lxq")]
-modulate = Color(0.622978, 0.558601, 1, 1)
+[node name="VisionCone2D" parent="." node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d") instance=ExtResource("5_b7lxq")]
 show_behind_parent = true
 rotation = -1.5708
 angle_deg = 45
 ray_count = 20
 max_distance = 125.0
+write_collision_polygon = NodePath("VisionConeArea2/VisionConeCollider")
+write_polygon2d = NodePath("VisionConeRenderer2")
 
 [node name="VisionConeRenderer2" type="Polygon2D" parent="VisionCone2D"]
+color = Color(0.431373, 0.929412, 0.278431, 0.286275)
 
 [node name="VisionConeArea2" type="Area2D" parent="VisionCone2D"]
 collision_layer = 0
@@ -134,3 +138,6 @@ npc = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2"]
 position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_0eji4")
+
+[connection signal="body_entered" from="VisionCone2D/VisionConeArea2" to="." method="_on_vision_cone_area_2_body_entered"]
+[connection signal="body_exited" from="VisionCone2D/VisionConeArea2" to="." method="_on_vision_cone_area_2_body_exited"]

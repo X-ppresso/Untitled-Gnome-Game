@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://lqijwakbvmo5"]
 
 [ext_resource type="Script" path="res://Scripts/kei.gd" id="1_nuh37"]
-[ext_resource type="PackedScene" path="res://Scenes/vision_cone_2d_template.tscn" id="2_83pxp"]
+[ext_resource type="PackedScene" uid="uid://6tb0uvrq0dr1" path="res://Scenes/vision_cone_2d_template.tscn" id="2_83pxp"]
 [ext_resource type="Texture2D" uid="uid://0oneqrgbw6bi" path="res://Sprites/kei-idle-rev01t.png" id="2_vgrlk"]
 [ext_resource type="Texture2D" uid="uid://bicpvj440gsp1" path="res://Sprites/kei_looking left right.png" id="2_y2ky1"]
 [ext_resource type="Texture2D" uid="uid://drl1jbfh8452i" path="res://Sprites/kei-walk-rev01t.png" id="4_krtmk"]

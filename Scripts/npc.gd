@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 @onready var interaction_area : InteractionArea = $InteractionArea2
 
+@export var vision_renderer: Polygon2D
+@export var alert_color: Color
+
 @export_group("Movement")
 @export var move_on_path: PathFollow2D
 @export var movement_speed = 0.1
@@ -12,6 +15,8 @@ extends CharacterBody2D
 @export var is_interactable = true
 @export var outline: ShaderMaterial
 @export var default: ShaderMaterial
+
+@onready var original_color = vision_renderer.color if vision_renderer else Color.WHITE
 
 var is_highlighted = false
 var mouse_is_hovering = false
@@ -45,6 +50,14 @@ func _physics_process(delta: float) -> void:
 	rotation = move_on_path.rotation
 	
 	move_and_slide()
+
+func _on_vision_cone_area_2_body_entered(body: Node2D) -> void:
+	print("%s is seeing %s" % [self, body])
+	vision_renderer.color = alert_color
+
+func _on_vision_cone_area_2_body_exited(body: Node2D) -> void:
+	print("%s stopped seeing %s" % [self, body])
+	vision_renderer.color = original_color
 
 func _on_interact():
 	print("stolen")
