@@ -5,6 +5,8 @@ class_name PathFinding
 @onready var target : CharacterBody2D = owner.get_parent().find_child("Dobby")
 var direction = Vector2.ZERO
  
+var interact: Callable = func():
+	pass
  
 func _ready():
 	update_target()

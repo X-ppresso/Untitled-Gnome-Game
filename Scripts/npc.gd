@@ -38,7 +38,7 @@ func _toggle_outline():
 	if is_highlighted :
 		color_rect_node.material = default
 		is_highlighted = false
-	elif not is_highlighted and InteractionManager.can_interact :
+	elif not is_highlighted and interaction_area.can_interact :
 		color_rect_node.material = outline
 		is_highlighted = true
 	else:
@@ -58,13 +58,12 @@ func _physics_process(delta: float) -> void:
 func _on_vision_cone_area_2_body_entered(body: Node2D) -> void:
 	# print("%s is seeing %s" % [self, body])
 	vision_renderer.color = alert_color
-	if adolphus_present == false :
+	if Global.adolphus_present == false :
 		$Alertsound.play()
 		adolphus.spawn_to_map()
-		adolphus_present = true
+		Global.adolphus_present = true
 	else:
 		pass
-
 
 func _on_vision_cone_area_2_body_exited(body: Node2D) -> void:
 	# print("%s stopped seeing %s" % [self, body])
@@ -72,4 +71,5 @@ func _on_vision_cone_area_2_body_exited(body: Node2D) -> void:
 
 func _on_interact():
 	print("stolen")
-	Score.score += 250
+	_toggle_outline()
+	Global.score += 250

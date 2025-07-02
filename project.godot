@@ -13,15 +13,19 @@ config_version=5
 config/name="Untitled Gnome Game"
 run/main_scene="res://Scenes/ui/Menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/image="res://Sprites/1175226315536875620.png"
+boot_splash/fullsize=false
 config/icon="res://Sprites/gold.png"
+boot_splash/minimum_display_time=2000
 
 [autoload]
 
+Global="*res://Scripts/Global.gd"
 InteractionManager="*res://Scenes/System/interaction_manager.tscn"
-Score="*res://Scripts/Score.gd"
 
 [display]
 
+window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 

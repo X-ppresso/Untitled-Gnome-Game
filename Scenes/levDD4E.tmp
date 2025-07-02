@@ -910,7 +910,7 @@ position = Vector2(374, 145)
 interaction_area = NodePath("InteractionArea3")
 adolphus = NodePath("../Adolphus")
 move_on_path = NodePath("../Path2D4/PathFollow2D")
-movement_speed = 0.02
+movement_speed = 0.05
 
 [node name="InteractionArea3" parent="NPC3" node_paths=PackedStringArray("npc") instance=ExtResource("7_w5tes")]
 z_index = 20
