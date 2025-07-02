@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
-@onready var interaction_area : InteractionArea = $InteractionArea2
+@export var interaction_area : InteractionArea
 
 @export var vision_renderer: Polygon2D
 @export var alert_color: Color
+@export var adolphus : CharacterBody2D
+var adolphus_present = false
 
 @export_group("Movement")
 @export var move_on_path: PathFollow2D
@@ -29,9 +31,7 @@ var interact: Callable = func():
 	pass
 
 func _ready() -> void:
-	randomize()
-	modulate = colors[randi() % colors.size()]
-	$NPC.play("idle")
+	
 	interaction_area.interact = Callable(self, "_on_interact")
 
 func _toggle_outline():
@@ -48,16 +48,28 @@ func _physics_process(delta: float) -> void:
 	move_on_path.progress += movement_speed
 	global_position = move_on_path.position
 	rotation = move_on_path.rotation
+	if movement_speed != 0:
+		$NPC.play("walk")
+	else:
+		$NPC.play("idle")
 	
 	move_and_slide()
 
 func _on_vision_cone_area_2_body_entered(body: Node2D) -> void:
-	print("%s is seeing %s" % [self, body])
+	# print("%s is seeing %s" % [self, body])
 	vision_renderer.color = alert_color
+	if adolphus_present == false :
+		$Alertsound.play()
+		adolphus.spawn_to_map()
+		adolphus_present = true
+	else:
+		pass
+
 
 func _on_vision_cone_area_2_body_exited(body: Node2D) -> void:
-	print("%s stopped seeing %s" % [self, body])
+	# print("%s stopped seeing %s" % [self, body])
 	vision_renderer.color = original_color
 
 func _on_interact():
 	print("stolen")
+	Score.score += 250

@@ -46,9 +46,10 @@ func _physics_process(delta: float) -> void:
 	velocity = lerp(velocity, target_velocity, acceleration * delta)
 	
 	if Input.is_action_pressed("run"):
-		speed = 175
+		speed = 100
 	else: 
-		speed =100
+		speed =50
+		# INI UDAH PAS YA BRTI??? OGEY
 	
 	move_and_slide()
 	
@@ -269,7 +270,6 @@ func exit_disguise_mode():
 	is_in_disguise = false
 	$Dobby_anim.visible = true
 	$disguise.visible = false
-	$"../Game_Over".game_over()
 
 func _on_disguise_timer_timeout() -> void:
 	exit_disguise_mode()

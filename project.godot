@@ -13,17 +13,17 @@ config_version=5
 config/name="Untitled Gnome Game"
 run/main_scene="res://Scenes/ui/Menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Sprites/gold.png"
 
 [autoload]
 
 InteractionManager="*res://Scenes/System/interaction_manager.tscn"
+Score="*res://Scripts/Score.gd"
 
 [display]
 
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
-window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
@@ -36,6 +36,7 @@ folder_colors={
 "res://Scenes/": "red",
 "res://Scripts/": "orange",
 "res://Shaders/": "yellow",
+"res://Sounds/": "yellow",
 "res://Sprites/": "green",
 "res://Tilemap/": "teal"
 }

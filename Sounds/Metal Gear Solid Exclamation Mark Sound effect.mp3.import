@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bauyg3o2ymu2v"
+path="res://.godot/imported/Metal Gear Solid Exclamation Mark Sound effect.mp3-8878da22c8452e48140b583ab52516a1.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Metal Gear Solid Exclamation Mark Sound effect.mp3"
+dest_files=["res://.godot/imported/Metal Gear Solid Exclamation Mark Sound effect.mp3-8878da22c8452e48140b583ab52516a1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

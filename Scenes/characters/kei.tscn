@@ -1,26 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://lqijwakbvmo5"]
+[gd_scene load_steps=21 format=3 uid="uid://lqijwakbvmo5"]
 
-[ext_resource type="Script" path="res://Scripts/kei.gd" id="1_nuh37"]
+[ext_resource type="Script" path="res://Scripts/npc.gd" id="1_ppp48"]
 [ext_resource type="PackedScene" uid="uid://6tb0uvrq0dr1" path="res://Scenes/vision_cone_2d_template.tscn" id="2_83pxp"]
 [ext_resource type="Texture2D" uid="uid://0oneqrgbw6bi" path="res://Sprites/kei-idle-rev01t.png" id="2_vgrlk"]
 [ext_resource type="Texture2D" uid="uid://bicpvj440gsp1" path="res://Sprites/kei_looking left right.png" id="2_y2ky1"]
 [ext_resource type="Texture2D" uid="uid://drl1jbfh8452i" path="res://Sprites/kei-walk-rev01t.png" id="4_krtmk"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sj7yq"]
-atlas = ExtResource("2_vgrlk")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bb0pc"]
-atlas = ExtResource("2_vgrlk")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_237g7"]
-atlas = ExtResource("2_vgrlk")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fptpj"]
-atlas = ExtResource("2_vgrlk")
-region = Rect2(96, 0, 32, 32)
+[ext_resource type="AudioStream" uid="uid://bauyg3o2ymu2v" path="res://Sounds/Metal Gear Solid Exclamation Mark Sound effect.mp3" id="6_3tvao"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iob7q"]
 atlas = ExtResource("2_y2ky1")
@@ -36,6 +21,22 @@ region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_07our"]
 atlas = ExtResource("2_y2ky1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj7yq"]
+atlas = ExtResource("2_vgrlk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb0pc"]
+atlas = ExtResource("2_vgrlk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_237g7"]
+atlas = ExtResource("2_vgrlk")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fptpj"]
+atlas = ExtResource("2_vgrlk")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_68uv2"]
@@ -58,23 +59,6 @@ region = Rect2(96, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sj7yq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bb0pc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_237g7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fptpj")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_iob7q")
 }, {
 "duration": 1.0,
@@ -92,6 +76,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_sj7yq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb0pc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_237g7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fptpj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_68uv2")
 }, {
 "duration": 1.0,
@@ -104,7 +105,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_0ssdk")
 }],
 "loop": true,
-"name": &"Walk",
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -112,22 +113,42 @@ animations = [{
 radius = 4.0
 height = 22.0
 
-[node name="Kei" type="CharacterBody2D"]
+[node name="Kei" type="CharacterBody2D" node_paths=PackedStringArray("vision_renderer")]
 collision_layer = 8
 collision_mask = 9
-script = ExtResource("1_nuh37")
+script = ExtResource("1_ppp48")
+vision_renderer = NodePath("VisionCone2D/VisionConeRenderer2")
+alert_color = Color(0.759, 0, 0.053, 0.514)
 
-[node name="VisionCone2D" parent="." instance=ExtResource("2_83pxp")]
+[node name="VisionCone2D" parent="." node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d") instance=ExtResource("2_83pxp")]
+show_behind_parent = true
 rotation = -1.5708
-angle_deg = 45
+angle_deg = 35
 ray_count = 20
-max_distance = 150.0
+max_distance = 75.0
+write_collision_polygon = NodePath("VisionConeArea2/VisionConeCollider")
+write_polygon2d = NodePath("VisionConeRenderer2")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="VisionConeRenderer2" type="Polygon2D" parent="VisionCone2D"]
+color = Color(0.431373, 0.929412, 0.278431, 0.286275)
+
+[node name="VisionConeArea2" type="Area2D" parent="VisionCone2D"]
+collision_layer = 0
+monitorable = false
+
+[node name="VisionConeCollider" type="CollisionPolygon2D" parent="VisionCone2D/VisionConeArea2"]
+
+[node name="NPC" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_irm2l")
-animation = &"Idle"
-frame_progress = 0.93485
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_cimkk")
+
+[node name="Alertsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_3tvao")
+volume_db = -30.0
+
+[connection signal="body_entered" from="VisionCone2D/VisionConeArea2" to="." method="_on_vision_cone_area_2_body_entered"]
+[connection signal="body_exited" from="VisionCone2D/VisionConeArea2" to="." method="_on_vision_cone_area_2_body_exited"]

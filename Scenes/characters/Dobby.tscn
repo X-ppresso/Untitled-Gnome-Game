@@ -293,6 +293,7 @@ animations = [{
 position = Vector2(2, 0)
 collision_mask = 11
 script = ExtResource("1_7y735")
+speed = 100
 distraction_dummy_scene = ExtResource("2_1nwm4")
 placement_camera_scene = ExtResource("3_mn8jy")
 

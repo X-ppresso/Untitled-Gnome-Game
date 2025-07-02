@@ -368,6 +368,7 @@ tile_set = SubResource("TileSet_e00td")
 position = Vector2(77, -38)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.205509, 0.325576, 0.55865, 1)
 
 [node name="Kei" parent="." instance=ExtResource("5_duma5")]

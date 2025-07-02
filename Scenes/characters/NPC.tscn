@@ -1,11 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://c4nnkyvx66n27"]
+[gd_scene load_steps=18 format=3 uid="uid://c4nnkyvx66n27"]
 
 [ext_resource type="Script" path="res://Scripts/npc.gd" id="1_83bud"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="2_2eo2t"]
+[ext_resource type="AudioStream" uid="uid://bauyg3o2ymu2v" path="res://Sounds/Metal Gear Solid Exclamation Mark Sound effect.mp3" id="2_26kgb"]
 [ext_resource type="Texture2D" uid="uid://dyu4dlqxeo3q8" path="res://Sprites/npc-idle-rev01.png" id="3_w1lah"]
 [ext_resource type="PackedScene" uid="uid://6tb0uvrq0dr1" path="res://Scenes/vision_cone_2d_template.tscn" id="5_b7lxq"]
 [ext_resource type="Texture2D" uid="uid://b8g12pgd1qfua" path="res://Sprites/npc-walk-rev01.png" id="5_tuwo0"]
-[ext_resource type="PackedScene" uid="uid://c4voibe7cwodo" path="res://Scenes/System/interaction_area.tscn" id="7_wwjcr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1nn7e"]
 shader = ExtResource("2_2eo2t")
@@ -86,9 +86,6 @@ animations = [{
 "speed": 3.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0eji4"]
-radius = 16.0
-
 [node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("vision_renderer")]
 collision_layer = 8
 collision_mask = 3
@@ -130,14 +127,9 @@ sprite_frames = SubResource("SpriteFrames_ghoma")
 animation = &"idle"
 frame_progress = 0.243916
 
-[node name="InteractionArea2" parent="." node_paths=PackedStringArray("npc") instance=ExtResource("7_wwjcr")]
-z_index = 20
-interaction_name = "Steal (Left Click)"
-npc = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2"]
-position = Vector2(1, 0)
-shape = SubResource("CircleShape2D_0eji4")
+[node name="Alertsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_26kgb")
+volume_db = -30.0
 
 [connection signal="body_entered" from="VisionCone2D/VisionConeArea2" to="." method="_on_vision_cone_area_2_body_entered"]
 [connection signal="body_exited" from="VisionCone2D/VisionConeArea2" to="." method="_on_vision_cone_area_2_body_exited"]
